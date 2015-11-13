@@ -6,9 +6,20 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4C487E781BF3A0A400E595DE /* MPHMacPassHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C487E771BF3A0A400E595DE /* MPHMacPassHTTP.m */; };
+		4C487E7C1BF3A47700E595DE /* MPHSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */; };
+		4C487E7D1BF3A47700E595DE /* MacPassHTTPSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C487E7B1BF3A47700E595DE /* MacPassHTTPSettings.xib */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		4C487E6D1BF39FC500E595DE /* MacPassHTTP.mpplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacPassHTTP.mpplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C487E701BF39FC500E595DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C487E761BF3A0A400E595DE /* MPHMacPassHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHMacPassHTTP.h; sourceTree = "<group>"; };
+		4C487E771BF3A0A400E595DE /* MPHMacPassHTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHMacPassHTTP.m; sourceTree = "<group>"; };
+		4C487E791BF3A47700E595DE /* MPHSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHSettingsViewController.h; sourceTree = "<group>"; };
+		4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHSettingsViewController.m; sourceTree = "<group>"; };
+		4C487E7B1BF3A47700E595DE /* MacPassHTTPSettings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MacPassHTTPSettings.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +53,11 @@
 			isa = PBXGroup;
 			children = (
 				4C487E701BF39FC500E595DE /* Info.plist */,
+				4C487E761BF3A0A400E595DE /* MPHMacPassHTTP.h */,
+				4C487E771BF3A0A400E595DE /* MPHMacPassHTTP.m */,
+				4C487E791BF3A47700E595DE /* MPHSettingsViewController.h */,
+				4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */,
+				4C487E7B1BF3A47700E595DE /* MacPassHTTPSettings.xib */,
 			);
 			path = MacPassHTTP;
 			sourceTree = "<group>";
@@ -72,6 +88,7 @@
 		4C487E651BF39FC500E595DE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = MPH;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "HicknHack Software GmbH";
 				TargetAttributes = {
@@ -102,6 +119,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C487E7D1BF3A47700E595DE /* MacPassHTTPSettings.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +130,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C487E781BF3A0A400E595DE /* MPHMacPassHTTP.m in Sources */,
+				4C487E7C1BF3A47700E595DE /* MPHSettingsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -135,7 +155,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -154,7 +174,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -178,7 +198,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -191,7 +211,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
@@ -201,11 +221,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(HOME)";
+				HEADER_SEARCH_PATHS = "/Users/michael/Projekte/MacPass/**";
 				INFOPLIST_FILE = MacPassHTTP/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "/Library/Application Support/MacPass";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hicknhacksoftware.MacPassHTTP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = mpplugin;
 			};
 			name = Debug;
@@ -214,11 +241,18 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = "$(HOME)";
+				HEADER_SEARCH_PATHS = "/Users/michael/Projekte/MacPass/**";
 				INFOPLIST_FILE = MacPassHTTP/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PATH = "/Library/Application Support/MacPass";
+				OTHER_LDFLAGS = (
+					"-undefined",
+					dynamic_lookup,
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.hicknhacksoftware.MacPassHTTP;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
+				SKIP_INSTALL = NO;
 				WRAPPER_EXTENSION = mpplugin;
 			};
 			name = Release;
