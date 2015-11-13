@@ -7,7 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "MPPlugin.h"
 
-@interface MPHMacPassHTTP : MPPlugin
+@interface MPHMacPassHTTP : MPPlugin <MPPluginSettings>
 
 @end

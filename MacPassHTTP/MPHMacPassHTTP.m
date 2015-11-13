@@ -7,7 +7,19 @@
 //
 
 #import "MPHMacPassHTTP.h"
+#import "MPHSettingsViewController.h"
+
+@interface MPHMacPassHTTP ()
+@property (strong) MPHSettingsViewController *vc;
+@end
 
 @implementation MPHMacPassHTTP
+
+- (NSViewController *)settingsViewController {
+  if(!self.vc) {
+    self.vc = [[MPHSettingsViewController alloc] init];
+  }
+  return self.vc;
+}
 
 @end

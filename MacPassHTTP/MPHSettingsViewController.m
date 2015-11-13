@@ -14,9 +14,16 @@
 
 @implementation MPHSettingsViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do view setup here.
+- (NSBundle *)nibBundle {
+  return [NSBundle bundleForClass:[self class]];
+}
+
+- (NSString *)nibName {
+  return @"MacPassHTTPSettings";
+}
+
+- (void)awakeFromNib {
+  // Initalize
 }
 
 @end
