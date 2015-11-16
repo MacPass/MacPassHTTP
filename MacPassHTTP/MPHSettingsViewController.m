@@ -7,8 +7,13 @@
 //
 
 #import "MPHSettingsViewController.h"
+#import "MPHMacPassHTTP.h"
 
 @interface MPHSettingsViewController ()
+
+@property (weak) IBOutlet NSButton *enableCheckButton;
+@property (weak) IBOutlet NSTextField *portTextField;
+@property (weak) IBOutlet NSButton *showMenuItemCheckButton;
 
 @end
 
@@ -23,7 +28,13 @@
 }
 
 - (void)awakeFromNib {
-  // Initalize
+  static BOOL didAwake = NO;
+  if(!didAwake) {
+    NSUserDefaultsController *defaultsController = [NSUserDefaultsController sharedUserDefaultsController];
+    [self.enableCheckButton bind:NSValueBinding toObject:defaultsController withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyEnableHttpServer] options:nil];
+    [self.portTextField bind:NSValueBinding toObject:defaultsController withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyHttpPort] options:nil];
+    [self.showMenuItemCheckButton bind:NSValueBinding toObject:defaultsController withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyShowMenuItem] options:nil];
+    didAwake = YES;
+  }
 }
-
 @end
