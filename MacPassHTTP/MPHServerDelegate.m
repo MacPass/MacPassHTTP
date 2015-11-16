@@ -13,8 +13,7 @@
 #import <KeePassKit/KeePassKit.h>
 
 static NSUUID *_rootUUID = nil;
-
-#define AES_KEY_ATTRIBUTE @"AES key: %@"
+static NSString *const _kAESAttributeKey = @"AES key: %@";
 
 @interface MPHServerDelegate ()
 
@@ -109,7 +108,7 @@ static NSUUID *_rootUUID = nil;
       NSString *entryUsername = [entry.username finalValueForEntry:entry];
       NSString *entryPassword = [entry.password finalValueForEntry:entry];
       
-      if (url == nil || [entryTitle rangeOfString:url].location != NSNotFound || [entryUrl rangeOfString:url].location != NSNotFound) {
+      if (url == nil || [entryTitle rangeOfString:url].length > 0 || [entryUrl rangeOfString:url].length > 0) {
         [entries addObject:[KPHResponseEntry entryWithUrl:entryUrl name:entryTitle login:entryUsername password:entryPassword uuid:[entry.uuid UUIDString] stringFields:nil]];
       }
     }
@@ -131,7 +130,7 @@ static NSUUID *_rootUUID = nil;
     return nil;
   }
   
-  return [self.configurationEntry customAttributeForKey:[NSString stringWithFormat:AES_KEY_ATTRIBUTE, label]].value;
+  return [self.configurationEntry customAttributeForKey:[NSString stringWithFormat:_kAESAttributeKey, label]].value;
 }
 
 - (NSString *)server:(KPHServer *)server labelForKey:(NSString *)key {
@@ -141,10 +140,10 @@ static NSUUID *_rootUUID = nil;
   
   NSAlert *alert = [[NSAlert alloc] init];
   alert.messageText = @"KeePassHttp";
-  alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"A server with the key \"%@\" has requested access to your password database. Would you like to allow access?", @""), key];
+  alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"dialog.request_access.message_%@", @"Message shown when a new KeePassHTTP Client want's access to the database"), key];
   alert.alertStyle = NSWarningAlertStyle;
-  [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"")];
-  [alert addButtonWithTitle:NSLocalizedString(@"No", @"")];
+  [alert addButtonWithTitle:NSLocalizedString(@"dialog.request_access.allow_button", @"Allow acces to Database")];
+  [alert addButtonWithTitle:NSLocalizedString(@"dialog.request_access.deny_button", @"Deny acces to database")];
   
   NSString __block *label = nil;
   dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
@@ -154,7 +153,7 @@ static NSUUID *_rootUUID = nil;
     if(ret == NSAlertFirstButtonReturn) {
       // TODO: get label from user input
       label = [NSString passwordWithCharactersets:MPPasswordCharactersLowerCase withCustomCharacters:nil length:16];
-      [self.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:AES_KEY_ATTRIBUTE, label] value:key]];
+      [self.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, label] value:key]];
     }
     dispatch_semaphore_signal(sema);
   });
