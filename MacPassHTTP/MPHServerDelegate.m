@@ -66,16 +66,18 @@ static NSUUID *_rootUUID = nil;
     KPKEntry *configEntry = [document findEntry:_rootUUID];
     if(nil != configEntry) {
       /* if the configEntry is not in the root group then move it there */
-      if (![configEntry.parent.uuid isEqual:document.root.uuid])
+      if (![configEntry.parent.uuid isEqual:document.root.uuid]) {
         [configEntry moveToGroup:document.root];
+      }
       self.configurationEntry = configEntry;
       self.queryDocument = document;
       return _configurationEntry;
     }
   }
   
-  if (lastDocument)
+  if (lastDocument) {
     return [self _createConfigurationEntry:lastDocument];
+  }
   
   return nil;
 }
@@ -117,36 +119,39 @@ static NSUUID *_rootUUID = nil;
 }
 
 - (NSArray *)server:(KPHServer *)server entriesForURL:(NSString *)url {
-  if (!self.queryDocumentOpen)
+  if (!self.queryDocumentOpen) {
     return @[];
+  }
   
   return [MPHServerDelegate recursivelyFindEntriesInGroups:self.queryDocument.root.groups forURL:url];
 }
 
 - (NSString *)server:(KPHServer *)server keyForLabel:(NSString *)label {
-  if (!self.queryDocumentOpen)
+  if (!self.queryDocumentOpen) {
     return nil;
+  }
   
   return [self.configurationEntry customAttributeForKey:[NSString stringWithFormat:AES_KEY_ATTRIBUTE, label]].value;
 }
 
 - (NSString *)server:(KPHServer *)server labelForKey:(NSString *)key {
-  if (!self.queryDocumentOpen)
+  if (!self.queryDocumentOpen) {
     return nil;
+  }
   
   NSAlert *alert = [[NSAlert alloc] init];
-  [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"")];
-  [alert addButtonWithTitle:NSLocalizedString(@"No", @"")];
   alert.messageText = @"KeePassHttp";
   alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"A server with the key \"%@\" has requested access to your password database. Would you like to allow access?", @""), key];
   alert.alertStyle = NSWarningAlertStyle;
+  [alert addButtonWithTitle:NSLocalizedString(@"Yes", @"")];
+  [alert addButtonWithTitle:NSLocalizedString(@"No", @"")];
   
   NSString __block *label = nil;
   dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
   
   dispatch_async(dispatch_get_main_queue(), ^{
     NSInteger ret = [alert runModal];
-    if (ret == NSAlertFirstButtonReturn) {
+    if(ret == NSAlertFirstButtonReturn) {
       // TODO: get label from user input
       label = [NSString passwordWithCharactersets:MPPasswordCharactersLowerCase withCustomCharacters:nil length:16];
       [self.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:AES_KEY_ATTRIBUTE, label] value:key]];
@@ -160,30 +165,26 @@ static NSUUID *_rootUUID = nil;
 }
 
 - (void)server:(KPHServer *)server setUsername:(NSString *)username andPassword:(NSString *)password forURL:(NSString *)url withUUID:(NSString *)uuid {
-  if (!self.queryDocumentOpen)
+  if (!self.queryDocumentOpen) {
     return;
+  }
   
-  KPKEntry *entry = nil;
-  if (uuid)
-    entry = [self.queryDocument findEntry:[[NSUUID alloc] initWithUUIDString:uuid]];
+  KPKEntry *entry = uuid ? [self.queryDocument findEntry:[[NSUUID alloc] initWithUUIDString:uuid]] : nil;
   
-  BOOL shouldAddEntry = !entry;
-  
-  if (!entry)
-    entry = [self.queryDocument.tree createEntry:self.queryDocument.root]; // TODO: store this somewhere better
-  
+  if (!entry) {
+    entry = [[KPKEntry alloc] init];
+    [self.queryDocument.root addEntry:entry];
+  }
   entry.title = url;
   entry.username = username;
   entry.password = password;
   entry.url = url;
-  
-  if (shouldAddEntry)
-    [self.queryDocument.root addEntry:entry];
 }
 
 - (NSArray *)allEntriesForServer:(KPHServer *)server {
-  if (!self.queryDocumentOpen)
+  if (!self.queryDocumentOpen) {
     return @[];
+  }
   
   return [MPHServerDelegate recursivelyFindEntriesInGroups:self.queryDocument.root.groups forURL:nil];
 }
@@ -193,10 +194,11 @@ static NSUUID *_rootUUID = nil;
 }
 
 - (NSString *)clientHashForServer:(KPHServer *)server {
-  if (!self.queryDocumentOpen)
+  if (!self.queryDocumentOpen) {
     return nil;
+  }
   
-  return [NSString stringWithFormat:@"%@%@", [self.queryDocument.root.uuid UUIDString], [self.queryDocument.trash.uuid UUIDString]];
+  return [NSString stringWithFormat:@"%@%@", self.queryDocument.root.uuid.UUIDString, self.queryDocument.trash.uuid.UUIDString];
 }
 
 @end

@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		4C487E781BF3A0A400E595DE /* MPHMacPassHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C487E771BF3A0A400E595DE /* MPHMacPassHTTP.m */; };
 		4C487E7C1BF3A47700E595DE /* MPHSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */; };
-		4C487E7D1BF3A47700E595DE /* MacPassHTTPSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C487E7B1BF3A47700E595DE /* MacPassHTTPSettings.xib */; };
 		4C967E361BF63CA900B1838C /* MPHServerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C967E351BF63CA900B1838C /* MPHServerDelegate.m */; };
 		4CDE59411BF9F0B100C7AF5B /* GCDWebServers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDE593F1BF9F0B100C7AF5B /* GCDWebServers.framework */; };
 		4CDE59421BF9F0B100C7AF5B /* KeePassHTTPKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CDE59401BF9F0B100C7AF5B /* KeePassHTTPKit.framework */; };
 		4CDE59431BF9F0F500C7AF5B /* GCDWebServers.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CDE593F1BF9F0B100C7AF5B /* GCDWebServers.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4CDE59441BF9F0F500C7AF5B /* KeePassHTTPKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4CDE59401BF9F0B100C7AF5B /* KeePassHTTPKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4CDE59481BFA051000C7AF5B /* MacPassHTTPSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDE594A1BFA051000C7AF5B /* MacPassHTTPSettings.xib */; };
+		4CDE594C1BFA054900C7AF5B /* Localizeable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4CDE594B1BFA054900C7AF5B /* Localizeable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,11 +39,12 @@
 		4C487E771BF3A0A400E595DE /* MPHMacPassHTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHMacPassHTTP.m; sourceTree = "<group>"; };
 		4C487E791BF3A47700E595DE /* MPHSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHSettingsViewController.h; sourceTree = "<group>"; };
 		4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHSettingsViewController.m; sourceTree = "<group>"; };
-		4C487E7B1BF3A47700E595DE /* MacPassHTTPSettings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MacPassHTTPSettings.xib; sourceTree = "<group>"; };
 		4C967E341BF63CA900B1838C /* MPHServerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHServerDelegate.h; sourceTree = "<group>"; };
 		4C967E351BF63CA900B1838C /* MPHServerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHServerDelegate.m; sourceTree = "<group>"; };
 		4CDE593F1BF9F0B100C7AF5B /* GCDWebServers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GCDWebServers.framework; path = Carthage/Build/Mac/GCDWebServers.framework; sourceTree = "<group>"; };
 		4CDE59401BF9F0B100C7AF5B /* KeePassHTTPKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = KeePassHTTPKit.framework; path = Carthage/Build/Mac/KeePassHTTPKit.framework; sourceTree = "<group>"; };
+		4CDE59491BFA051000C7AF5B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MacPassHTTPSettings.xib; sourceTree = "<group>"; };
+		4CDE594B1BFA054900C7AF5B /* Localizeable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizeable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,9 +86,10 @@
 				4C487E701BF39FC500E595DE /* Info.plist */,
 				4C487E791BF3A47700E595DE /* MPHSettingsViewController.h */,
 				4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */,
-				4C487E7B1BF3A47700E595DE /* MacPassHTTPSettings.xib */,
+				4CDE594A1BFA051000C7AF5B /* MacPassHTTPSettings.xib */,
 				4C967E341BF63CA900B1838C /* MPHServerDelegate.h */,
 				4C967E351BF63CA900B1838C /* MPHServerDelegate.m */,
+				4CDE594B1BFA054900C7AF5B /* Localizeable.strings */,
 			);
 			path = MacPassHTTP;
 			sourceTree = "<group>";
@@ -149,7 +152,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C487E7D1BF3A47700E595DE /* MacPassHTTPSettings.xib in Resources */,
+				4CDE59481BFA051000C7AF5B /* MacPassHTTPSettings.xib in Resources */,
+				4CDE594C1BFA054900C7AF5B /* Localizeable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +171,17 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		4CDE594A1BFA051000C7AF5B /* MacPassHTTPSettings.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4CDE59491BFA051000C7AF5B /* en */,
+			);
+			name = MacPassHTTPSettings.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		4C487E711BF39FC500E595DE /* Debug */ = {
