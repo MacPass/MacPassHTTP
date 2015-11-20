@@ -11,9 +11,9 @@
 
 FOUNDATION_EXPORT NSUInteger const kKeePassHTTPDefaultPort;
 
-FOUNDATION_EXPORT NSString *const kMPHSettingsKeyEnableHttpServer;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyShowMenuItem;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyHttpPort;
+FOUNDATION_EXPORT NSString *const kMPHSettingsKeyShowNotifications;
 
 @interface MPHMacPassHTTP : MPPlugin <MPPluginSettings>
 

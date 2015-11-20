@@ -11,13 +11,18 @@
 
 @interface MPHSettingsViewController ()
 
-@property (weak) IBOutlet NSButton *enableCheckButton;
 @property (weak) IBOutlet NSTextField *portTextField;
 @property (weak) IBOutlet NSButton *showMenuItemCheckButton;
 
 @end
 
 @implementation MPHSettingsViewController
+
+- (void)dealloc {
+  NSLog(@"%@ dealloc", [self class]);
+  [self.portTextField unbind:NSValueBinding];
+  [self.showMenuItemCheckButton unbind:NSValueBinding];
+}
 
 - (NSBundle *)nibBundle {
   return [NSBundle bundleForClass:[self class]];
@@ -31,7 +36,10 @@
   static BOOL didAwake = NO;
   if(!didAwake) {
     NSUserDefaultsController *defaultsController = [NSUserDefaultsController sharedUserDefaultsController];
-    [self.enableCheckButton bind:NSValueBinding toObject:defaultsController withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyEnableHttpServer] options:nil];
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    formatter.allowsFloats = NO;
+    formatter.alwaysShowsDecimalSeparator = NO;
+    self.portTextField.formatter = formatter;
     [self.portTextField bind:NSValueBinding toObject:defaultsController withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyHttpPort] options:nil];
     [self.showMenuItemCheckButton bind:NSValueBinding toObject:defaultsController withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyShowMenuItem] options:nil];
     didAwake = YES;

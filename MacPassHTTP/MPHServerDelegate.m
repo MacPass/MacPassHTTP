@@ -39,6 +39,10 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   return self;
 }
 
+- (void)dealloc {
+  NSLog(@"%@ dealloc", [self class]);
+}
+
 - (BOOL)queryDocumentOpen {
   [self configurationEntry];
   return self.queryDocument && !self.queryDocument.encrypted;
