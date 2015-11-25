@@ -144,10 +144,12 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   
   NSAlert *alert = [[NSAlert alloc] init];
   alert.messageText = @"KeePassHttp";
-  alert.informativeText = [NSString stringWithFormat:NSLocalizedString(@"dialog.request_access.message_%@", @"Message shown when a new KeePassHTTP Client want's access to the database"), key];
+  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+  NSString *message = NSLocalizedStringFromTableInBundle(@"dialog.request_access.message_%@", @"", bundle, @"Message shown when a new KeePassHTTP Client want's access to the database");
+  alert.informativeText = [NSString stringWithFormat:message, key];
   alert.alertStyle = NSWarningAlertStyle;
-  [alert addButtonWithTitle:NSLocalizedString(@"dialog.request_access.allow_button", @"Allow acces to Database")];
-  [alert addButtonWithTitle:NSLocalizedString(@"dialog.request_access.deny_button", @"Deny acces to database")];
+  [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"dialog.request_access.allow_button", @"", bundle, @"Allow acces to Database")];
+  [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"dialog.request_access.deny_button", @"", bundle, @"Deny acces to database")];
   
   NSString __block *label = nil;
   dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
