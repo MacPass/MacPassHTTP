@@ -1,1 +1,1 @@
-github "mstarke/KeePassHTTPKit" "67ae3d4f89af8b3a9e217e9cbc8fb1cf0a5cf6c2"
+github "mstarke/KeePassHTTPKit" ~> 1.0.0
