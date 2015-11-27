@@ -66,11 +66,18 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
     
     lastDocument = document;
     
-    KPKEntry *configEntry = [document findEntry:_rootUUID];
+    KPKEntry *configEntry = [lastDocument findEntry:_rootUUID];
     if(nil != configEntry) {
       /* if the configEntry is not in the root group then move it there */
-      if (![configEntry.parent.uuid isEqual:document.root.uuid]) {
-        [configEntry moveToGroup:document.root];
+      if (![configEntry.parent.uuid isEqual:lastDocument.root.uuid]) {
+        /* model updates only on main thread for UI safety */
+        dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+          [configEntry moveToGroup:lastDocument.root];
+          dispatch_semaphore_signal(sema);
+        });
+        dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
       }
       self.configurationEntry = configEntry;
       self.queryDocument = document;
@@ -88,8 +95,14 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
 - (KPKEntry *)_createConfigurationEntry:(MPDocument *)document {
   KPKEntry *configEntry = [[KPKEntry alloc] initWithUUID:_rootUUID];
   configEntry.title = @"KeePassHttp Settings";
-  [document.root addEntry:configEntry];
-  
+  /* move the entry only on the main thread! */
+  dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [document.root addEntry:configEntry];
+    dispatch_semaphore_signal(sema);
+  });
+  dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+
   self.configurationEntry = [document findEntry:_rootUUID];
   self.queryDocument = document;
   
@@ -126,7 +139,7 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
     return @[];
   }
   
-  return [MPHServerDelegate recursivelyFindEntriesInGroups:self.queryDocument.root.groups forURL:url];
+  return [MPHServerDelegate recursivelyFindEntriesInGroups:@[self.queryDocument.root] forURL:url];
 }
 
 - (NSString *)server:(KPHServer *)server keyForLabel:(NSString *)label {
@@ -157,7 +170,6 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   dispatch_async(dispatch_get_main_queue(), ^{
     NSInteger ret = [alert runModal];
     if(ret == NSAlertFirstButtonReturn) {
-      // TODO: get label from user input
       label = [NSString passwordWithCharactersets:MPPasswordCharactersLowerCase withCustomCharacters:nil length:16];
       [self.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, label] value:key]];
     }
@@ -176,6 +188,7 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   
   KPKEntry *entry = uuid ? [self.queryDocument findEntry:[[NSUUID alloc] initWithUUIDString:uuid]] : nil;
   
+  /* TODO move to main thread */
   if (!entry) {
     entry = [[KPKEntry alloc] init];
     [self.queryDocument.root addEntry:entry];

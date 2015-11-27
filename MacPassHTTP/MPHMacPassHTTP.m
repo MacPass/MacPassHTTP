@@ -100,7 +100,7 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
       self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
       self.statusItem.menu = [[NSMenu alloc] init];
       [self.statusItem.menu addItemWithTitle:@"STATUS" action:NULL keyEquivalent:@""];
-      NSImage *image = [NSImage imageNamed:NSImageNameApplicationIcon];
+      NSImage *image = [[NSImage imageNamed:NSImageNameApplicationIcon] copy];
       image.size = NSMakeSize(18, 18);
       [self.statusItem setImage:image];
     }
