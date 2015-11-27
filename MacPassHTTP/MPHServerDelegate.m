@@ -7,9 +7,12 @@
 //
 
 #import "MPHServerDelegate.h"
+#import "MPHRequestAccessWindowController.h"
 
 #import "MPDocument.h"
 #import "NSString+MPPasswordCreation.h"
+
+
 #import "KeePassKit/KeePassKit.h"
 
 static NSUUID *_rootUUID = nil;
@@ -163,16 +166,22 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   alert.alertStyle = NSWarningAlertStyle;
   [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"dialog.request_access.allow_button", @"", bundle, @"Allow acces to Database")];
   [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"dialog.request_access.deny_button", @"", bundle, @"Deny acces to database")];
-  
-  NSString __block *label = nil;
+
+
   dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
   
+  NSString __block *label = nil;
   dispatch_async(dispatch_get_main_queue(), ^{
-    NSInteger ret = [alert runModal];
-    if(ret == NSAlertFirstButtonReturn) {
-      label = [NSString passwordWithCharactersets:MPPasswordCharactersLowerCase withCustomCharacters:nil length:16];
-      [self.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, label] value:key]];
-    }
+    MPHRequestAccessWindowController *c = [[MPHRequestAccessWindowController alloc] init];
+    __weak NSWindow *w = c.window;
+    c.completionBlock = ^void(NSModalResponse r) {
+      if(r == NSModalResponseContinue) {
+        label = c.title;
+        [self.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, label] value:key]];
+      }
+      [NSApp endSheet:w];
+    };
+    [NSApp runModalForWindow:c.window];
     dispatch_semaphore_signal(sema);
   });
   
