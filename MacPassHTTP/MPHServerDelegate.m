@@ -156,7 +156,7 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   }
   
   NSAlert *alert = [[NSAlert alloc] init];
-  alert.messageText = @"KeePassHttp";
+  alert.messageText = @"MacPassHTTP";
   NSBundle *bundle = [NSBundle bundleForClass:[self class]];
   NSString *message = NSLocalizedStringFromTableInBundle(@"dialog.request_access.message_%@", @"", bundle, @"Message shown when a new KeePassHTTP Client want's access to the database");
   alert.informativeText = [NSString stringWithFormat:message, key];
