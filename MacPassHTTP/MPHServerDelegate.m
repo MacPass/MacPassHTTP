@@ -185,18 +185,21 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   if (!self.queryDocumentOpen) {
     return;
   }
+  /* creat entry on main thread */
+  __weak MPHServerDelegate *welf = self;
+  dispatch_async(dispatch_get_main_queue(), ^{
+    KPKEntry *entry = uuid ? [welf.queryDocument findEntry:[[NSUUID alloc] initWithUUIDString:uuid]] : nil;
+    
+    if (!entry) {
+      entry = [[KPKEntry alloc] init];
+      [welf.queryDocument.root addEntry:entry];
+    }
+    entry.title = url;
+    entry.username = username;
+    entry.password = password;
+    entry.url = url;
+  });
   
-  KPKEntry *entry = uuid ? [self.queryDocument findEntry:[[NSUUID alloc] initWithUUIDString:uuid]] : nil;
-  
-  /* TODO move to main thread */
-  if (!entry) {
-    entry = [[KPKEntry alloc] init];
-    [self.queryDocument.root addEntry:entry];
-  }
-  entry.title = url;
-  entry.username = username;
-  entry.password = password;
-  entry.url = url;
 }
 
 - (NSArray *)allEntriesForServer:(KPHServer *)server {
