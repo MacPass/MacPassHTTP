@@ -14,8 +14,16 @@ cd MacPassHTTP
 * Install [Carthage](https://github.com/Carthage/Carthage#installing-carthage)
 * Fetch and build dependencies
 ```bash
-carthage bootstrap
+carthage bootstrap --platform Mac
 ```
+
+* Compile and Install MacPassHTTP
+```bash
+xcodebuild
+```
+
+The Plugin is moved to the plugin folder of MacPass automacially.
+````~/Libary/Application Support/MacPass/MacPassHTTP.mpplugin````
 
 ##License
 The MIT License (MIT)
