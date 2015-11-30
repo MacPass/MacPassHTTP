@@ -316,7 +316,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				HEADER_SEARCH_PATHS = "/Users/michael/Projekte/MacPass/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../MacPass/**";
 				INFOPLIST_FILE = MacPassHTTP/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/MacPass";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @executable_path/../Frameworks";
@@ -343,7 +343,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
-				HEADER_SEARCH_PATHS = "/Users/michael/Projekte/MacPass/**";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/../MacPass/**";
 				INFOPLIST_FILE = MacPassHTTP/Info.plist;
 				INSTALL_PATH = "/Library/Application Support/MacPass";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/../Frameworks @executable_path/../Frameworks";

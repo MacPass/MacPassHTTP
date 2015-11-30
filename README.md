@@ -5,6 +5,8 @@ KeePassHTTP plugin for [MacPass](https://github.com/mstarke/MacPass)
 ##Dependencies
 [KeePassHTTPKit](https://github.com/MacPass/KeePassHTTPKit)
 
+[MacPass Source](https://github.com/mstarke/MacPass)
+
 ##Installation
 * Clone the repository
 ```bash
@@ -16,6 +18,19 @@ cd MacPassHTTP
 ```bash
 carthage bootstrap --platform Mac
 ```
+* Clone MacPass
+```bash
+git clone https://github.com/mstarke/MacPass
+cd MacPass
+git submodule init
+git submodule update
+```
+* If your folder structure isn't like the following, you need to adjust the ````HEADER_SEARCH_PATHS```` to point to the MacPass folder
+````
+└─ Folder
+   ├─ MacPass
+   └─ MacPassHTTP
+````
 
 * Compile and Install MacPassHTTP
 ```bash
