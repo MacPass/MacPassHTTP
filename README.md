@@ -22,8 +22,7 @@ carthage bootstrap --platform Mac
 ```bash
 git clone https://github.com/mstarke/MacPass
 cd MacPass
-git submodule init
-git submodule update
+git submodule update --init --recursive
 ```
 * If your folder structure isn't like the following, you need to adjust the ````HEADER_SEARCH_PATHS```` to point to the MacPass folder
 ````
