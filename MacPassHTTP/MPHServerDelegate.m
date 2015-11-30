@@ -10,7 +10,7 @@
 
 #import "MPDocument.h"
 #import "NSString+MPPasswordCreation.h"
-#import <KeePassKit/KeePassKit.h>
+#import "KeePassKit/KeePassKit.h"
 
 static NSUUID *_rootUUID = nil;
 static NSString *const _kAESAttributeKey = @"AES key: %@";
