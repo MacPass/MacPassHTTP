@@ -18,7 +18,7 @@
 static NSUUID *_rootUUID = nil;
 static NSString *const _kAESAttributeKey = @"AES key: %@";
 
-@interface MPHServerDelegate ()
+@interface MPHServerDelegate () <NSUserNotificationCenterDelegate>
 
 @property (weak) MPDocument *queryDocument;
 @property (nonatomic, weak) KPKEntry *configurationEntry;
@@ -37,6 +37,7 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
       0x9f, 0x36, 0x89, 0x7d, 0x62, 0x3e, 0xcb, 0x31
     };
     _rootUUID = [[NSUUID alloc] initWithUUIDBytes:uuidBytes];
+    [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
     
   }
   return self;
@@ -141,7 +142,12 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   if (!self.queryDocumentOpen) {
     return @[];
   }
+  NSUserNotificationCenter *notificationCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
+  NSUserNotification *userNotification = [[NSUserNotification alloc] init];
+  userNotification.title = [NSString stringWithFormat:@"Requested entries for: %@",url];
+  userNotification.deliveryDate = [NSDate date];
   
+  [notificationCenter scheduleNotification:userNotification];
   return [MPHServerDelegate recursivelyFindEntriesInGroups:@[self.queryDocument.root] forURL:url];
 }
 
@@ -158,30 +164,18 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
     return nil;
   }
   
-  NSAlert *alert = [[NSAlert alloc] init];
-  alert.messageText = @"MacPassHTTP";
-  NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-  NSString *message = NSLocalizedStringFromTableInBundle(@"dialog.request_access.message_%@", @"", bundle, @"Message shown when a new KeePassHTTP Client want's access to the database");
-  alert.informativeText = [NSString stringWithFormat:message, key];
-  alert.alertStyle = NSWarningAlertStyle;
-  [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"dialog.request_access.allow_button", @"", bundle, @"Allow acces to Database")];
-  [alert addButtonWithTitle:NSLocalizedStringFromTableInBundle(@"dialog.request_access.deny_button", @"", bundle, @"Deny acces to database")];
-
-
   dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
   
   NSString __block *label = nil;
+  __weak KPKEntry *configEntry = self.configurationEntry;
   dispatch_async(dispatch_get_main_queue(), ^{
-    MPHRequestAccessWindowController *c = [[MPHRequestAccessWindowController alloc] init];
-    __weak NSWindow *w = c.window;
-    c.completionBlock = ^void(NSModalResponse r) {
-      if(r == NSModalResponseContinue) {
-        label = c.title;
-        [self.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, label] value:key]];
+    MPHRequestAccessWindowController *requestController = [[MPHRequestAccessWindowController alloc] init];
+    [requestController presentWindowForKey:key completionHandler:^(NSModalResponse response, NSString *identifier) {
+      if(response == NSModalResponseContinue) {
+        [configEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, identifier] value:key]];
       }
-      [NSApp endSheet:w];
-    };
-    [NSApp runModalForWindow:c.window];
+      label = identifier;
+    }];
     dispatch_semaphore_signal(sema);
   });
   
@@ -229,6 +223,10 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   }
   
   return [NSString stringWithFormat:@"%@%@", self.queryDocument.root.uuid.UUIDString, self.queryDocument.trash.uuid.UUIDString];
+}
+
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
+  return YES;
 }
 
 @end

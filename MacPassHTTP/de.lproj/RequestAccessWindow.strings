@@ -1,0 +1,15 @@
+
+/* Class = "NSTextFieldCell"; title = "Identifier:"; ObjectID = "5rD-Vu-jX2"; */
+"5rD-Vu-jX2.title" = "Titel:";
+
+/* Class = "NSWindow"; title = "Association Request"; ObjectID = "F0z-JX-Cv5"; */
+"F0z-JX-Cv5.title" = "Zugriffsanfragen";
+
+/* Class = "NSButtonCell"; title = "Allow access!"; ObjectID = "n7U-wH-6b1"; */
+"n7U-wH-6b1.title" = "Zugriff erlauben!";
+
+/* Class = "NSButtonCell"; title = "Deny access!"; ObjectID = "tdI-Bi-Qmp"; */
+"tdI-Bi-Qmp.title" = "Zugriff verweigern!";
+
+/* Class = "NSTextFieldCell"; title = "Message"; ObjectID = "uU3-aw-rJd"; */
+"uU3-aw-rJd.title" = "Message";

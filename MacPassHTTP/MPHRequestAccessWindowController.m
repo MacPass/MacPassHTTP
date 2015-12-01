@@ -8,9 +8,13 @@
 
 #import "MPHRequestAccessWindowController.h"
 
-@interface MPHRequestAccessWindowController ()
+@interface MPHRequestAccessWindowController () <NSTextFieldDelegate>
 @property (weak) IBOutlet NSTextField *messageTextField;
 @property (weak) IBOutlet NSTextField *identifierTextField;
+@property (weak) IBOutlet NSButton *allowButton;
+
+@property (nonatomic, copy) NSString *key;
+@property (nonatomic, copy) void(^completionHandler)(NSModalResponse response, NSString *identifier);
 
 - (IBAction)allow:(id)sender;
 - (IBAction)deny:(id)sender;
@@ -27,22 +31,42 @@
   return self.identifierTextField.stringValue;
 }
 
+- (void)presentWindowForKey:(NSString *)key completionHandler:(void (^)(NSModalResponse, NSString *))handler {
+  self.key = key;
+  self.completionHandler = handler;
+  [NSApp runModalForWindow:self.window];
+}
+
 - (void)windowDidLoad {
   [super windowDidLoad];
-  self.identifierTextField.stringValue = self.title ? self.title : [NSUUID UUID].UUIDString;
+  
+  NSBundle *bundle = [NSBundle bundleForClass:self.class];
+  NSString *message = NSLocalizedStringFromTableInBundle(@"REQUEST_ACCESS_MESSAGE_%@", @"", bundle, @"Message shown when a new KeePassHTTP Client want's access to the database");
+
+  self.identifierTextField.delegate = self;
+  self.identifierTextField.stringValue = [NSUUID UUID].UUIDString;
+  self.messageTextField.stringValue = [NSString stringWithFormat:message, self.key];
+}
+
+- (void)controlTextDidChange:(NSNotification *)obj {
+  if(obj.object == self.identifierTextField) {
+    self.allowButton.enabled = self.identifierTextField.stringValue.length > 0;
+  }
 }
 
 - (IBAction)allow:(id)sender {
-  if(self.completionBlock) {
-    self.completionBlock(NSModalResponseContinue);
+  if(self.completionHandler) {
+    self.completionHandler(NSModalResponseContinue, self.identifierTextField.stringValue);
   }
   [self.window orderOut:self];
+  [NSApp stopModalWithCode:NSModalResponseContinue];
 }
 
 - (IBAction)deny:(id)sender {
-  if(self.completionBlock) {
-    self.completionBlock(NSModalResponseAbort);
+  if(self.completionHandler) {
+    self.completionHandler(NSModalResponseAbort, self.identifierTextField.stringValue);
   }
   [self.window orderOut:self];
+  [NSApp stopModalWithCode:NSModalResponseAbort];
 }
 @end

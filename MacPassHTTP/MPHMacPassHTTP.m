@@ -105,8 +105,8 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
       [self.statusItem setImage:image];
     }
     NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
-    NSString *okTitle = NSLocalizedStringFromTableInBundle(@"status_menu.item.title.ok", @"", myBundle, "Item displayed when server is running!");
-    NSString *errorTitle =  NSLocalizedStringFromTableInBundle(@"status_menu.item.title.error", @"", myBundle, "Item displayed when server failed to start!");
+    NSString *okTitle = NSLocalizedStringFromTableInBundle(@"STATUS_OK", @"", myBundle, "Item displayed when server is running!");
+    NSString *errorTitle =  NSLocalizedStringFromTableInBundle(@"STATUS_ERROR", @"", myBundle, "Item displayed when server failed to start!");
     self.statusItem.menu.itemArray.firstObject.title = self.server.isRunning ? okTitle : errorTitle;
   }
   else if(self.statusItem) {

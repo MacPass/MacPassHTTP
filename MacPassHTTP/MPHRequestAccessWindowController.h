@@ -10,7 +10,6 @@
 
 @interface MPHRequestAccessWindowController : NSWindowController
 
-@property (nonatomic, copy) void(^completionBlock)(NSModalResponse response);
-@property (nonatomic, copy) NSString *title;
+- (void)presentWindowForKey:(NSString *)key completionHandler:(void(^)(NSModalResponse response, NSString *identifier))handler;
 
 @end
