@@ -13,8 +13,8 @@
 @property (weak) IBOutlet NSTextField *identifierTextField;
 @property (weak) IBOutlet NSButton *allowButton;
 
-@property (nonatomic, copy) NSString *key;
-@property (nonatomic, copy) void(^completionHandler)(NSModalResponse response, NSString *identifier);
+@property (copy) NSString *requestKey;
+@property (copy) void(^completionHandler)(MPHRequestResponse response, NSString *identifier);
 
 - (IBAction)allow:(id)sender;
 - (IBAction)deny:(id)sender;
@@ -27,14 +27,17 @@
   return @"RequestAccessWindow";
 }
 
-- (NSString *)title {
+- (NSString *)identifier {
   return self.identifierTextField.stringValue;
 }
 
-- (void)presentWindowForKey:(NSString *)key completionHandler:(void (^)(NSModalResponse, NSString *))handler {
-  self.key = key;
-  self.completionHandler = handler;
-  [NSApp runModalForWindow:self.window];
+- (instancetype)initWithRequestKey:(NSString *)key completionHandler:(void (^)(MPHRequestResponse, NSString *))handler {
+  self = [super initWithWindow:nil];
+  if(self) {
+    self.completionHandler = handler;
+    self.requestKey = key;
+  }
+  return self;
 }
 
 - (void)windowDidLoad {
@@ -42,10 +45,11 @@
   
   NSBundle *bundle = [NSBundle bundleForClass:self.class];
   NSString *message = NSLocalizedStringFromTableInBundle(@"REQUEST_ACCESS_MESSAGE_%@", @"", bundle, @"Message shown when a new KeePassHTTP Client want's access to the database");
-
+  
   self.identifierTextField.delegate = self;
   self.identifierTextField.stringValue = [NSUUID UUID].UUIDString;
-  self.messageTextField.stringValue = [NSString stringWithFormat:message, self.key];
+  self.messageTextField.stringValue = [NSString stringWithFormat:message, self.requestKey];
+  
 }
 
 - (void)controlTextDidChange:(NSNotification *)obj {
@@ -56,17 +60,15 @@
 
 - (IBAction)allow:(id)sender {
   if(self.completionHandler) {
-    self.completionHandler(NSModalResponseContinue, self.identifierTextField.stringValue);
+    self.completionHandler(MPHRequestResponseAllow, self.identifierTextField.stringValue);
   }
-  [self.window orderOut:self];
-  [NSApp stopModalWithCode:NSModalResponseContinue];
+  [self dismissSheet:MPHRequestResponseAllow];
 }
 
 - (IBAction)deny:(id)sender {
   if(self.completionHandler) {
-    self.completionHandler(NSModalResponseAbort, self.identifierTextField.stringValue);
+    self.completionHandler(MPHRequestResponseDeny, self.identifierTextField.stringValue);
   }
-  [self.window orderOut:self];
-  [NSApp stopModalWithCode:NSModalResponseAbort];
+  [self dismissSheet:MPHRequestResponseDeny];
 }
 @end

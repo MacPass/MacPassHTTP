@@ -35,8 +35,8 @@
 		4C10B73C1C08D2150077E477 /* MPHRequestAccessWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHRequestAccessWindowController.h; sourceTree = "<group>"; };
 		4C10B73D1C08D2150077E477 /* MPHRequestAccessWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHRequestAccessWindowController.m; sourceTree = "<group>"; };
 		4C3CAB011BFF32AB009B4DF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MacPassHTTPSettings.strings; sourceTree = "<group>"; };
-		4C3CAB061BFF339E009B4DF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		4C3CAB081BFF33AA009B4DF0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4C3CAB061BFF339E009B4DF0 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4C3CAB081BFF33AA009B4DF0 /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C487E6D1BF39FC500E595DE /* MacPassHTTP.mpplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacPassHTTP.mpplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C487E701BF39FC500E595DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4C487E761BF3A0A400E595DE /* MPHMacPassHTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHMacPassHTTP.h; sourceTree = "<group>"; };
@@ -44,7 +44,7 @@
 		4C487E791BF3A47700E595DE /* MPHSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHSettingsViewController.h; sourceTree = "<group>"; };
 		4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHSettingsViewController.m; sourceTree = "<group>"; };
 		4C5B48D61BFF3AED0036906C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/MacPassHTTPSettings.strings; sourceTree = "<group>"; };
-		4C5B48D71BFF3AED0036906C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		4C5B48D71BFF3AED0036906C /* de */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C7B63821C0CC66400D7038C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/RequestAccessWindow.xib; sourceTree = "<group>"; };
 		4C7B63851C0CC66700D7038C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RequestAccessWindow.strings; sourceTree = "<group>"; };
 		4C7B63871C0CC66800D7038C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/RequestAccessWindow.strings; sourceTree = "<group>"; };

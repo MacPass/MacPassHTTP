@@ -23,6 +23,8 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
 @property (weak) MPDocument *queryDocument;
 @property (nonatomic, weak) KPKEntry *configurationEntry;
 @property (readonly) BOOL queryDocumentOpen;
+@property (strong) MPHRequestAccessWindowController *requestController;
+
 
 @end
 
@@ -106,7 +108,7 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
     dispatch_semaphore_signal(sema);
   });
   dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-
+  
   self.configurationEntry = [document findEntry:_rootUUID];
   self.queryDocument = document;
   
@@ -167,20 +169,23 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
   
   NSString __block *label = nil;
-  __weak KPKEntry *configEntry = self.configurationEntry;
-  dispatch_async(dispatch_get_main_queue(), ^{
-    MPHRequestAccessWindowController *requestController = [[MPHRequestAccessWindowController alloc] init];
-    [requestController presentWindowForKey:key completionHandler:^(NSModalResponse response, NSString *identifier) {
-      if(response == NSModalResponseContinue) {
-        [configEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, identifier] value:key]];
-      }
-      label = identifier;
-    }];
+  __weak MPHServerDelegate *welf = self;
+  
+  self.requestController = [[MPHRequestAccessWindowController alloc] initWithRequestKey:key completionHandler:^(MPHRequestResponse response, NSString *identifier) {
+    if(response == MPHRequestResponseAllow) {
+      [welf.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, identifier] value:key]];
+    }
+    label = identifier;
     dispatch_semaphore_signal(sema);
+  }];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    
+    // sheet dismissal get's done inside the window
+    [NSApp beginSheet:welf.requestController.window modalForWindow:welf.queryDocument.windowForSheet modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
   });
   
   dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
-  
   return label;
 }
 

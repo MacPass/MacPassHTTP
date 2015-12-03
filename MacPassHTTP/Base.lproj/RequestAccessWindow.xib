@@ -17,36 +17,36 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Association Request" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES"/>
-            <rect key="contentRect" x="196" y="240" width="347" height="116"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
+            <rect key="contentRect" x="196" y="240" width="341" height="116"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
             <view key="contentView" id="se5-gp-TjO">
-                <rect key="frame" x="0.0" y="0.0" width="347" height="116"/>
+                <rect key="frame" x="0.0" y="0.0" width="341" height="116"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MzR-3k-dKj">
-                        <rect key="frame" x="210" y="13" width="123" height="32"/>
+                        <rect key="frame" x="204" y="13" width="123" height="32"/>
                         <animations/>
                         <buttonCell key="cell" type="push" title="Allow access!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n7U-wH-6b1">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="allow:" target="-2" id="F7w-NJ-jV6"/>
+                            <action selector="allow:" target="-2" id="U8W-YJ-ae1"/>
                         </connections>
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wAp-Xa-psT">
-                        <rect key="frame" x="89" y="13" width="121" height="32"/>
+                        <rect key="frame" x="83" y="13" width="121" height="32"/>
                         <animations/>
                         <buttonCell key="cell" type="push" title="Deny access!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tdI-Bi-Qmp">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
                         <connections>
-                            <action selector="deny:" target="-2" id="tAE-R2-H5a"/>
+                            <action selector="deny:" target="-2" id="ej6-JT-k70"/>
                         </connections>
                     </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xu-1L-rXT">
-                        <rect key="frame" x="18" y="79" width="311" height="17"/>
+                        <rect key="frame" x="74" y="79" width="249" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Message" id="uU3-aw-rJd">
                             <font key="font" metaFont="system"/>
@@ -55,7 +55,7 @@
                         </textFieldCell>
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efe-4D-9iG">
-                        <rect key="frame" x="18" y="52" width="62" height="17"/>
+                        <rect key="frame" x="74" y="52" width="62" height="17"/>
                         <animations/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Identifier:" id="5rD-Vu-jX2">
                             <font key="font" metaFont="system"/>
@@ -64,7 +64,7 @@
                         </textFieldCell>
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KOq-nn-JLf">
-                        <rect key="frame" x="86" y="49" width="241" height="22"/>
+                        <rect key="frame" x="142" y="49" width="179" height="22"/>
                         <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="hzz-0W-acf">
                             <font key="font" metaFont="system"/>
@@ -72,19 +72,30 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lDE-kX-o70">
+                        <rect key="frame" x="20" y="34" width="48" height="48"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="hsB-65-9SS"/>
+                            <constraint firstAttribute="height" constant="48" id="o5t-3s-obD"/>
+                        </constraints>
+                        <animations/>
+                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSCaution" id="h38-A6-blI"/>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="efe-4D-9iG" firstAttribute="leading" secondItem="7Xu-1L-rXT" secondAttribute="leading" id="08k-7F-p99"/>
+                    <constraint firstItem="lDE-kX-o70" firstAttribute="centerY" secondItem="se5-gp-TjO" secondAttribute="centerY" id="3JA-xI-eWS"/>
                     <constraint firstItem="KOq-nn-JLf" firstAttribute="top" secondItem="7Xu-1L-rXT" secondAttribute="bottom" constant="8" symbolic="YES" id="AUd-h4-KPf"/>
-                    <constraint firstItem="7Xu-1L-rXT" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="ApS-Kp-bKq"/>
                     <constraint firstItem="KOq-nn-JLf" firstAttribute="leading" secondItem="efe-4D-9iG" secondAttribute="trailing" constant="8" id="BAE-fO-sEv"/>
                     <constraint firstAttribute="bottom" secondItem="MzR-3k-dKj" secondAttribute="bottom" constant="20" id="Bo9-tv-mh1"/>
                     <constraint firstItem="wAp-Xa-psT" firstAttribute="baseline" secondItem="MzR-3k-dKj" secondAttribute="baseline" id="Ccq-xk-lT5"/>
-                    <constraint firstItem="wAp-Xa-psT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" symbolic="YES" id="Djk-nF-8bu"/>
                     <constraint firstItem="7Xu-1L-rXT" firstAttribute="top" secondItem="se5-gp-TjO" secondAttribute="top" constant="20" id="OHf-W7-slk"/>
                     <constraint firstItem="MzR-3k-dKj" firstAttribute="top" secondItem="KOq-nn-JLf" secondAttribute="bottom" constant="8" symbolic="YES" id="YT5-yF-4s8"/>
                     <constraint firstItem="MzR-3k-dKj" firstAttribute="leading" secondItem="wAp-Xa-psT" secondAttribute="trailing" constant="12" id="eNT-0c-Kna"/>
+                    <constraint firstItem="7Xu-1L-rXT" firstAttribute="leading" secondItem="lDE-kX-o70" secondAttribute="trailing" constant="8" symbolic="YES" id="he1-OC-2da"/>
+                    <constraint firstItem="wAp-Xa-psT" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="lDE-kX-o70" secondAttribute="trailing" constant="8" symbolic="YES" id="p1c-Pd-oMw"/>
                     <constraint firstAttribute="trailing" secondItem="7Xu-1L-rXT" secondAttribute="trailing" constant="20" id="pZN-sh-uAK"/>
+                    <constraint firstItem="lDE-kX-o70" firstAttribute="leading" secondItem="se5-gp-TjO" secondAttribute="leading" constant="20" id="ttU-UL-Q5G"/>
                     <constraint firstAttribute="trailing" secondItem="MzR-3k-dKj" secondAttribute="trailing" constant="20" id="vlB-fX-M8D"/>
                     <constraint firstAttribute="trailing" secondItem="KOq-nn-JLf" secondAttribute="trailing" constant="20" symbolic="YES" id="w1m-vA-hnm"/>
                     <constraint firstItem="KOq-nn-JLf" firstAttribute="baseline" secondItem="efe-4D-9iG" secondAttribute="baseline" id="wk1-pj-AdJ"/>
@@ -94,7 +105,10 @@
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="353.5" y="35"/>
+            <point key="canvasLocation" x="221.5" y="-257"/>
         </window>
     </objects>
+    <resources>
+        <image name="NSCaution" width="32" height="32"/>
+    </resources>
 </document>
