@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="portTextField" destination="r1I-t4-2dl" id="br6-xv-BwM"/>
                 <outlet property="showMenuItemCheckButton" destination="Ph9-8D-46q" id="Ek8-KF-9Kk"/>
+                <outlet property="showNotificationsCheckButton" destination="7X4-aF-1sY" id="M14-TF-IXs"/>
                 <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
             </connections>
         </customObject>
@@ -77,7 +78,7 @@
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="7X4-aF-1sY">
                                 <rect key="frame" x="18" y="18" width="210" height="18"/>
                                 <animations/>
-                                <buttonCell key="cell" type="check" title="Show notifications for requests" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="V3s-Sg-zYr">
+                                <buttonCell key="cell" type="check" title="Show notifications for requests" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="V3s-Sg-zYr">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -131,7 +132,7 @@
                 <constraint firstItem="91g-f4-0PT" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="x9a-YR-SMO"/>
             </constraints>
             <animations/>
-            <point key="canvasLocation" x="57" y="138"/>
+            <point key="canvasLocation" x="387" y="142"/>
         </customView>
     </objects>
 </document>

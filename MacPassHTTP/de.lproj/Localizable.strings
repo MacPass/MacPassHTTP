@@ -6,3 +6,12 @@
 
 /* Item displayed when server is running! */
 "STATUS_SERVER_OK" = "Server läuft!";
+
+/* Notificaton on entry request for url */
+"REQUEST_ENTRY_FOR_URL_%@" = "Logins für %@";
+
+/* Notification on updated credentials */
+"UPDATED_CREDENTIALS_USERNAME_%@_URL_%@" = "Nutzerdaten aktualisiert %@(%@)";
+
+/* Notification on newly created credentials */
+"CREATED_CREDENTIALS_USERNAME_%@_URL_%@" = "Neue Nutzerdaten erstellt %@(%@)";

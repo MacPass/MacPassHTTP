@@ -12,7 +12,6 @@
 #import "MPDocument.h"
 #import "NSString+MPPasswordCreation.h"
 
-
 #import "KeePassKit/KeePassKit.h"
 
 static NSUUID *_rootUUID = nil;
@@ -144,12 +143,8 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   if (!self.queryDocumentOpen) {
     return @[];
   }
-  NSUserNotificationCenter *notificationCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
-  NSUserNotification *userNotification = [[NSUserNotification alloc] init];
-  userNotification.title = [NSString stringWithFormat:@"Requested entries for: %@",url];
-  userNotification.deliveryDate = [NSDate date];
-  
-  [notificationCenter scheduleNotification:userNotification];
+  NSString *template = NSLocalizedStringFromTableInBundle(@"REQUEST_ENTRY_FOR_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notificaton on entry request for url");
+  [self showNotificationWithTitle:[NSString stringWithFormat:template,url]];
   return [MPHServerDelegate recursivelyFindEntriesInGroups:@[self.queryDocument.root] forURL:url];
 }
 
@@ -196,18 +191,29 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   /* creat entry on main thread */
   __weak MPHServerDelegate *welf = self;
   dispatch_async(dispatch_get_main_queue(), ^{
+    
     KPKEntry *entry = uuid ? [welf.queryDocument findEntry:[[NSUUID alloc] initWithUUIDString:uuid]] : nil;
     
+    NSString *title;
     if (!entry) {
+      /* create entry and tell the user about it*/
       entry = [[KPKEntry alloc] init];
       [welf.queryDocument.root addEntry:entry];
+      title = NSLocalizedStringFromTableInBundle(@"CREATED_CREDENTIALS_USERNAME_%@_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notification on newly created credentials");
+
     }
+    else {
+      /* just update the entry */
+      title = NSLocalizedStringFromTableInBundle(@"UPDATED_CREDENTIALS_USERNAME_%@_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notification on updated credentials");
+    }
+  
     entry.title = url;
     entry.username = username;
     entry.password = password;
     entry.url = url;
+    
+    [self showNotificationWithTitle:[NSString stringWithFormat:title, username, url]];
   });
-  
 }
 
 - (NSArray *)allEntriesForServer:(KPHServer *)server {
@@ -232,6 +238,15 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
   return YES;
+}
+
+- (void)showNotificationWithTitle:(NSString *)title {
+  NSUserNotificationCenter *notificationCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
+  NSUserNotification *userNotification = [[NSUserNotification alloc] init];
+  userNotification.title = title;
+  userNotification.deliveryDate = [NSDate date];
+  
+  [notificationCenter scheduleNotification:userNotification];
 }
 
 @end

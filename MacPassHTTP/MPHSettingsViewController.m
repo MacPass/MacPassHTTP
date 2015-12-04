@@ -13,6 +13,7 @@
 
 @property (weak) IBOutlet NSTextField *portTextField;
 @property (weak) IBOutlet NSButton *showMenuItemCheckButton;
+@property (weak) IBOutlet NSButton *showNotificationsCheckButton;
 
 @end
 
@@ -40,8 +41,18 @@
     formatter.allowsFloats = NO;
     formatter.alwaysShowsDecimalSeparator = NO;
     self.portTextField.formatter = formatter;
-    [self.portTextField bind:NSValueBinding toObject:defaultsController withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyHttpPort] options:nil];
-    [self.showMenuItemCheckButton bind:NSValueBinding toObject:defaultsController withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyShowMenuItem] options:nil];
+    [self.portTextField bind:NSValueBinding
+                    toObject:defaultsController
+                 withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyHttpPort]
+                     options:nil];
+    [self.showMenuItemCheckButton bind:NSValueBinding
+                              toObject:defaultsController
+                           withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyShowMenuItem]
+                               options:nil];
+    [self.showNotificationsCheckButton bind:NSValueBinding
+                                   toObject:defaultsController
+                                withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyShowNotifications]
+                                    options:nil];
     didAwake = YES;
   }
 }
