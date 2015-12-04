@@ -9,12 +9,17 @@
 #import <Cocoa/Cocoa.h>
 #import "MPPlugin.h"
 
+
 FOUNDATION_EXPORT NSUInteger const kKeePassHTTPDefaultPort;
 
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyShowMenuItem;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyHttpPort;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyShowNotifications;
 
+@class MPHServerDelegate;
+
 @interface MPHMacPassHTTP : MPPlugin <MPPluginSettings>
+
+@property (strong,readonly) MPHServerDelegate *serverDelegate;
 
 @end

@@ -24,7 +24,7 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
 @property (strong) MPHSettingsViewController *settingsViewController;
 @property (strong) KPHServer *server;
 @property (strong) NSStatusItem *statusItem;
-@property (strong) id<KPHDelegate> serverDelegate;
+@property (strong) MPHServerDelegate *serverDelegate;
 
 @property (nonatomic)  BOOL showStatusItem;
 @property (nonatomic)  NSUInteger serverPort;
@@ -72,6 +72,7 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
 - (NSViewController *)settingsViewController {
   if(!_settingsViewController) {
     self.settingsViewController = [[MPHSettingsViewController alloc] init];
+    self.settingsViewController.plugin = self;
   }
   return _settingsViewController;
 }

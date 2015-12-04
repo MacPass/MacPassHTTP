@@ -102,18 +102,24 @@
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BOb-dd-2DX">
                     <rect key="frame" x="20" y="48" width="242" height="25"/>
                     <animations/>
-                    <buttonCell key="cell" type="roundTextured" title="Delete shared encryption keys" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nED-Ay-y6q">
+                    <buttonCell key="cell" type="roundTextured" title="Delete shared encryption keys" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nED-Ay-y6q">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="clearKeys:" target="-2" id="Ruv-Sn-g10"/>
+                    </connections>
                 </button>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cDA-I7-ssZ">
                     <rect key="frame" x="20" y="18" width="242" height="25"/>
                     <animations/>
-                    <buttonCell key="cell" type="roundTextured" title="Delete stored permission" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="W51-OY-2BU">
+                    <buttonCell key="cell" type="roundTextured" title="Delete stored permission" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="W51-OY-2BU">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <connections>
+                        <action selector="clearPermissions:" target="-2" id="b9C-RA-IQ2"/>
+                    </connections>
                 </button>
             </subviews>
             <constraints>
@@ -132,7 +138,7 @@
                 <constraint firstItem="91g-f4-0PT" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="20" id="x9a-YR-SMO"/>
             </constraints>
             <animations/>
-            <point key="canvasLocation" x="387" y="142"/>
+            <point key="canvasLocation" x="360" y="114"/>
         </customView>
     </objects>
 </document>

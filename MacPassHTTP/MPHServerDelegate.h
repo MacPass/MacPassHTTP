@@ -11,6 +11,7 @@
 
 @interface MPHServerDelegate : NSObject <KPHDelegate>
 
-
+- (void)clearPermissions;
+- (void)clearKeys;
 
 @end

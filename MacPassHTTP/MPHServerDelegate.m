@@ -7,6 +7,7 @@
 //
 
 #import "MPHServerDelegate.h"
+#import "MPHMacPassHTTP.h"
 #import "MPHRequestAccessWindowController.h"
 
 #import "MPDocument.h"
@@ -15,7 +16,6 @@
 #import "KeePassKit/KeePassKit.h"
 
 static NSUUID *_rootUUID = nil;
-static NSString *const _kAESAttributeKey = @"AES key: %@";
 
 @interface MPHServerDelegate () <NSUserNotificationCenterDelegate>
 
@@ -44,8 +44,30 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   return self;
 }
 
-- (void)dealloc {
-  NSLog(@"%@ dealloc", [self class]);
+- (void)clearKeys {
+  if(!self.queryDocument) {
+    return;
+  }
+  /* TODO History support */
+  NSString *prefix = [NSString stringWithFormat:KPHAssociatKeyFormat, @"" ];
+  for(KPKAttribute *attribute in self.configurationEntry.customAttributes) {
+    if([attribute.key hasPrefix:prefix]) {
+      [self.configurationEntry removeCustomAttribute:attribute];
+    }
+  }
+
+}
+
+- (void)clearPermissions {
+  if(!self.queryDocument) {
+    return;
+  }
+  
+  /* TODO History support! */
+  for(KPKEntry *entry in self.queryDocument.root.childEntries) {
+    KPKAttribute *attribute = [entry customAttributeForKey:KPHSettingsEntryName];
+    [entry removeCustomAttribute:attribute];
+  }
 }
 
 - (BOOL)queryDocumentOpen {
@@ -99,7 +121,7 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
 
 - (KPKEntry *)_createConfigurationEntry:(MPDocument *)document {
   KPKEntry *configEntry = [[KPKEntry alloc] initWithUUID:_rootUUID];
-  configEntry.title = @"KeePassHttp Settings";
+  configEntry.title = KPHSettingsEntryName;
   /* move the entry only on the main thread! */
   dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
   dispatch_async(dispatch_get_main_queue(), ^{
@@ -153,7 +175,7 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
     return nil;
   }
   
-  return [self.configurationEntry customAttributeForKey:[NSString stringWithFormat:_kAESAttributeKey, label]].value;
+  return [self.configurationEntry customAttributeForKey:[NSString stringWithFormat:KPHAssociatKeyFormat, label]].value;
 }
 
 - (NSString *)server:(KPHServer *)server labelForKey:(NSString *)key {
@@ -168,7 +190,7 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
   
   self.requestController = [[MPHRequestAccessWindowController alloc] initWithRequestKey:key completionHandler:^(MPHRequestResponse response, NSString *identifier) {
     if(response == MPHRequestResponseAllow) {
-      [welf.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:_kAESAttributeKey, identifier] value:key]];
+      [welf.configurationEntry addCustomAttribute:[[KPKAttribute alloc] initWithKey:[NSString stringWithFormat:KPHAssociatKeyFormat, identifier] value:key]];
     }
     label = identifier;
     dispatch_semaphore_signal(sema);
@@ -237,10 +259,16 @@ static NSString *const _kAESAttributeKey = @"AES key: %@";
 }
 
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification {
-  return YES;
+  /* Do not show if disabled */
+  return [[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyShowNotifications];
 }
 
 - (void)showNotificationWithTitle:(NSString *)title {
+  BOOL showNotification = [[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyShowNotifications];
+  if(!showNotification) {
+    /* Just exit */
+    return;
+  }
   NSUserNotificationCenter *notificationCenter = [NSUserNotificationCenter defaultUserNotificationCenter];
   NSUserNotification *userNotification = [[NSUserNotification alloc] init];
   userNotification.title = title;

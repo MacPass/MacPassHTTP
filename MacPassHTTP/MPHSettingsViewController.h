@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class MPHMacPassHTTP;
+
 @interface MPHSettingsViewController : NSViewController
+
+@property (weak) MPHMacPassHTTP *plugin;
 
 @end

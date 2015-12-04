@@ -8,12 +8,16 @@
 
 #import "MPHSettingsViewController.h"
 #import "MPHMacPassHTTP.h"
+#import "MPHServerDelegate.h"
 
 @interface MPHSettingsViewController ()
 
 @property (weak) IBOutlet NSTextField *portTextField;
 @property (weak) IBOutlet NSButton *showMenuItemCheckButton;
 @property (weak) IBOutlet NSButton *showNotificationsCheckButton;
+
+- (IBAction)clearKeys:(id)sender;
+- (IBAction)clearPermissions:(id)sender;
 
 @end
 
@@ -55,5 +59,12 @@
                                     options:nil];
     didAwake = YES;
   }
+}
+- (IBAction)clearKeys:(id)sender {
+  [self.plugin.serverDelegate clearKeys];
+}
+
+- (IBAction)clearPermissions:(id)sender {
+  [self.plugin.serverDelegate clearPermissions];
 }
 @end
