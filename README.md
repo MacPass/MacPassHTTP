@@ -14,16 +14,18 @@ git clone https://github.com/MacPass/MacPassHTTP
 cd MacPassHTTP
 ```
 * Install [Carthage](https://github.com/Carthage/Carthage#installing-carthage)
-* Fetch and build dependencies
+* Fetch and build dependencies for MacPassHTTP
 ```bash
 carthage bootstrap --platform Mac
 ```
-* Clone MacPass
+* Clone MacPass and fetch and build dependencies
 ```bash
 git clone https://github.com/mstarke/MacPass
 cd MacPass
 git submodule update --init --recursive
+carthage bootstrap --platform Mac
 ```
+
 * If your folder structure isn't like the following, you need to adjust the ````HEADER_SEARCH_PATHS```` to point to the MacPass folder
 ````
 └─ Folder
