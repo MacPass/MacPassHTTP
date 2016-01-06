@@ -13,7 +13,7 @@
 #import "MPDocument.h"
 #import "NSString+MPPasswordCreation.h"
 
-#import "KeePassKit/KeePassKit.h"
+#import <KeePassKit/KeePassKit.h>
 
 static NSUUID *_rootUUID = nil;
 
@@ -157,7 +157,6 @@ static NSUUID *_rootUUID = nil;
       }
     }
   }
-  
   return entries;
 }
 
@@ -165,9 +164,13 @@ static NSUUID *_rootUUID = nil;
   if (!self.queryDocumentOpen) {
     return @[];
   }
-  NSString *template = NSLocalizedStringFromTableInBundle(@"REQUEST_ENTRY_FOR_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notificaton on entry request for url");
-  [self showNotificationWithTitle:[NSString stringWithFormat:template,url]];
-  return [MPHServerDelegate recursivelyFindEntriesInGroups:@[self.queryDocument.root] forURL:url];
+  
+  NSArray *results = [MPHServerDelegate recursivelyFindEntriesInGroups:@[self.queryDocument.root] forURL:url];
+  if(results.count > 0) {
+    NSString *template = NSLocalizedStringFromTableInBundle(@"REQUEST_ENTRY_FOR_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notificaton on entry request for url");
+    [self showNotificationWithTitle:[NSString stringWithFormat:template,url]];
+  }
+  return results;
 }
 
 - (NSString *)server:(KPHServer *)server keyForLabel:(NSString *)label {
