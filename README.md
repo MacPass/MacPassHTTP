@@ -39,7 +39,7 @@ xcodebuild
 ```
 
 The Plugin is moved to the plugin folder of MacPass automacially.
-````~/Libary/Application Support/MacPass/MacPassHTTP.mpplugin````
+````~/Library/Application Support/MacPass/MacPassHTTP.mpplugin````
 
 ##License
 The MIT License (MIT)
