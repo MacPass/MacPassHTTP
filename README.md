@@ -33,8 +33,9 @@ carthage bootstrap --platform Mac
    └─ MacPassHTTP
 ````
 
-* Compile and Install MacPassHTTP
+* Change back to the MacPassHTTP folder, compile and install
 ```bash
+cd ..
 xcodebuild
 ```
 
