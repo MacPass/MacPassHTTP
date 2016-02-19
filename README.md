@@ -20,6 +20,7 @@ carthage bootstrap --platform Mac
 ```
 * Clone MacPass and fetch and build dependencies
 ```bash
+cd ..
 git clone https://github.com/mstarke/MacPass
 cd MacPass
 git submodule update --init --recursive
