@@ -37,6 +37,7 @@ carthage bootstrap --platform Mac
 * Change back to the MacPassHTTP folder, compile and install
 ```bash
 cd ..
+cd MacPassHTTP
 xcodebuild
 ```
 
