@@ -15,9 +15,10 @@
 
 NSUInteger const kKeePassHTTPDefaultPort = 19455;
 
-NSString *const kMPHSettingsKeyShowMenuItem       = @"MPHTTPSettingsKeyShowMenuItem";
-NSString *const kMPHSettingsKeyHttpPort           = @"MPHTTPSettingsKeyHttpPort";
-NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotifications;";
+NSString *const kMPHSettingsKeyShowMenuItem           = @"MPHTTPSettingsKeyShowMenuItem";
+NSString *const kMPHSettingsKeyHttpPort               = @"MPHTTPSettingsKeyHttpPort";
+NSString *const kMPHSettingsKeyAllowRemoteConnections = @"MPHSettingsKeyAllowRemoteConnections" ;
+NSString *const kMPHSettingsKeyShowNotifications      = @"MPHTTPSettingsKeyShowNotifications;";
 
 
 @interface MPHMacPassHTTP ()
@@ -27,8 +28,9 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
 @property (strong) NSStatusItem *statusItem;
 @property (strong) MPHServerDelegate *serverDelegate;
 
-@property (nonatomic)  BOOL showStatusItem;
-@property (nonatomic)  NSUInteger serverPort;
+@property (nonatomic) BOOL showStatusItem;
+@property (nonatomic) NSUInteger serverPort;
+@property (nonatomic) BOOL allowRemoteConnection;
 
 @end
 
@@ -38,6 +40,7 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
 
 + (void)initialize {
   [[NSUserDefaults standardUserDefaults] registerDefaults:@{ kMPHSettingsKeyHttpPort : @(kKeePassHTTPDefaultPort),
+                                                             kMPHSettingsKeyAllowRemoteConnections : @(NO),
                                                              kMPHSettingsKeyShowNotifications : @(YES),
                                                              kMPHSettingsKeyShowMenuItem : @YES }];
 }
@@ -49,9 +52,11 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
     _serverPort = [[NSUserDefaults standardUserDefaults] integerForKey:kMPHSettingsKeyHttpPort];
     NSUserDefaultsController *defaultsController = [NSUserDefaultsController sharedUserDefaultsController];
     NSString *showItemKeyPath = [NSString stringWithFormat:@"values.%@", kMPHSettingsKeyShowMenuItem];
-    NSString *serverPortKeyPaht = [NSString stringWithFormat:@"values.%@", kMPHSettingsKeyHttpPort];
+    NSString *serverPortKeyPath = [NSString stringWithFormat:@"values.%@", kMPHSettingsKeyHttpPort];
+    NSString *remoteConnectionKeyPath = [NSString stringWithFormat:@"values.%@", kMPHSettingsKeyAllowRemoteConnections];
     [self bind:NSStringFromSelector(@selector(showStatusItem)) toObject:defaultsController withKeyPath:showItemKeyPath options:nil];
-    [self bind:NSStringFromSelector(@selector(serverPort)) toObject:defaultsController withKeyPath:serverPortKeyPaht options:nil];
+    [self bind:NSStringFromSelector(@selector(serverPort)) toObject:defaultsController withKeyPath:serverPortKeyPath options:nil];
+    [self bind:NSStringFromSelector(@selector(allowRemoteConnection)) toObject:defaultsController withKeyPath:remoteConnectionKeyPath options:nil];
     
     [self _startServer];
   }
@@ -96,6 +101,13 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
   }
 }
 
+- (void)setAllowRemoteConnection:(BOOL)allowRemoteConnection {
+  if(_allowRemoteConnection != allowRemoteConnection) {
+    _allowRemoteConnection = allowRemoteConnection;
+    [self _restartServer];
+  }
+}
+
 - (void)_updateStatusItem {
   if(self.showStatusItem) {
     if(!self.statusItem){
@@ -107,8 +119,8 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
       [self.statusItem setImage:image];
     }
     NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
-    NSString *okTitle = NSLocalizedStringFromTableInBundle(@"STATUS_OK", @"", myBundle, "Item displayed when server is running!");
-    NSString *errorTitle =  NSLocalizedStringFromTableInBundle(@"STATUS_ERROR", @"", myBundle, "Item displayed when server failed to start!");
+    NSString *okTitle = NSLocalizedStringFromTableInBundle(@"STATUS_SERVER_OK", @"", myBundle, "Item displayed when server is running!");
+    NSString *errorTitle =  NSLocalizedStringFromTableInBundle(@"STATUS_SERVER_ERROR", @"", myBundle, "Item displayed when server failed to start!");
     self.statusItem.menu.itemArray.firstObject.title = self.server.isRunning ? okTitle : errorTitle;
   }
   else if(self.statusItem) {
@@ -134,8 +146,9 @@ NSString *const kMPHSettingsKeyShowNotifications  = @"MPHTTPSettingsKeyShowNotif
 }
 
 - (void)_restartServer {
-  if(![self.server startWithPort:self.serverPort]) {
-    NSLog(@"Failed to start KeePassHttp server");
+  NSError *error;
+  if(![self.server startWithPort:self.serverPort bindToLocalhost:self.allowRemoteConnection error:&error]) {
+    NSLog(@"Unable to Start KeePassHTTP Server: %@", error.localizedDescription);
   }
   [self _updateStatusItem];
 }

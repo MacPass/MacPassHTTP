@@ -15,6 +15,7 @@
 @property (weak) IBOutlet NSTextField *portTextField;
 @property (weak) IBOutlet NSButton *showMenuItemCheckButton;
 @property (weak) IBOutlet NSButton *showNotificationsCheckButton;
+@property (weak) IBOutlet NSButton *allowRemoteConnectionCheckButton;
 
 - (IBAction)clearKeys:(id)sender;
 - (IBAction)clearPermissions:(id)sender;
@@ -56,6 +57,10 @@
     [self.showNotificationsCheckButton bind:NSValueBinding
                                    toObject:defaultsController
                                 withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyShowNotifications]
+                                    options:nil];
+    [self.allowRemoteConnectionCheckButton bind:NSValueBinding
+                                   toObject:defaultsController
+                                withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyAllowRemoteConnections]
                                     options:nil];
     didAwake = YES;
   }

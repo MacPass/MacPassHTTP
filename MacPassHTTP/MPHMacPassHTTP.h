@@ -14,7 +14,9 @@ FOUNDATION_EXPORT NSUInteger const kKeePassHTTPDefaultPort;
 
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyShowMenuItem;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyHttpPort;
+FOUNDATION_EXPORT NSString *const kMPHSettingsKeyAllowRemoteConnections;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyShowNotifications;
+
 
 @class MPHServerDelegate;
 
