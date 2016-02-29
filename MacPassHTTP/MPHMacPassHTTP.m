@@ -147,7 +147,7 @@ NSString *const kMPHSettingsKeyShowNotifications      = @"MPHTTPSettingsKeyShowN
 
 - (void)_restartServer {
   NSError *error;
-  if(![self.server startWithPort:self.serverPort bindToLocalhost:self.allowRemoteConnection error:&error]) {
+  if(![self.server startWithPort:self.serverPort bindToLocalhost:!self.allowRemoteConnection error:&error]) {
     NSLog(@"Unable to Start KeePassHTTP Server: %@", error.localizedDescription);
   }
   [self _updateStatusItem];
