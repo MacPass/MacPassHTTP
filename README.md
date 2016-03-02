@@ -23,6 +23,7 @@ carthage bootstrap --platform Mac
 cd ..
 git clone https://github.com/mstarke/MacPass
 cd MacPass
+git checkout 0.6.2-alpha
 git submodule update --init --recursive
 carthage bootstrap --platform Mac
 ```
