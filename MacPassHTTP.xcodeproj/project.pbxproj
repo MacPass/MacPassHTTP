@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30D115AD1C9F74C900D98D00 /* NSString+Levenshtein.m in Sources */ = {isa = PBXBuildFile; fileRef = 30D115AC1C9F74C900D98D00 /* NSString+Levenshtein.m */; };
 		4C10B73F1C08D2150077E477 /* MPHRequestAccessWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C10B73D1C08D2150077E477 /* MPHRequestAccessWindowController.m */; };
 		4C3CAB051BFF339E009B4DF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C3CAB071BFF339E009B4DF0 /* Localizable.strings */; };
 		4C487E781BF3A0A400E595DE /* MPHMacPassHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C487E771BF3A0A400E595DE /* MPHMacPassHTTP.m */; };
@@ -32,6 +33,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		30D115AB1C9F74C900D98D00 /* NSString+Levenshtein.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Levenshtein.h"; sourceTree = "<group>"; };
+		30D115AC1C9F74C900D98D00 /* NSString+Levenshtein.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Levenshtein.m"; sourceTree = "<group>"; };
 		4C10B73C1C08D2150077E477 /* MPHRequestAccessWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHRequestAccessWindowController.h; sourceTree = "<group>"; };
 		4C10B73D1C08D2150077E477 /* MPHRequestAccessWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHRequestAccessWindowController.m; sourceTree = "<group>"; };
 		4C3CAB011BFF32AB009B4DF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MacPassHTTPSettings.strings; sourceTree = "<group>"; };
@@ -106,6 +109,8 @@
 				4C487E701BF39FC500E595DE /* Info.plist */,
 				4C967E341BF63CA900B1838C /* MPHServerDelegate.h */,
 				4C967E351BF63CA900B1838C /* MPHServerDelegate.m */,
+				30D115AB1C9F74C900D98D00 /* NSString+Levenshtein.h */,
+				30D115AC1C9F74C900D98D00 /* NSString+Levenshtein.m */,
 			);
 			path = MacPassHTTP;
 			sourceTree = "<group>";
@@ -211,6 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4C487E781BF3A0A400E595DE /* MPHMacPassHTTP.m in Sources */,
+				30D115AD1C9F74C900D98D00 /* NSString+Levenshtein.m in Sources */,
 				4C967E361BF63CA900B1838C /* MPHServerDelegate.m in Sources */,
 				4C487E7C1BF3A47700E595DE /* MPHSettingsViewController.m in Sources */,
 				4C10B73F1C08D2150077E477 /* MPHRequestAccessWindowController.m in Sources */,
