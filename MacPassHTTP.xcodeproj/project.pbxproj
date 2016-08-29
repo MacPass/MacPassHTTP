@@ -13,7 +13,7 @@
 		4C487E7C1BF3A47700E595DE /* MPHSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */; };
 		4C7B63811C0CC66400D7038C /* RequestAccessWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4C7B63831C0CC66400D7038C /* RequestAccessWindow.xib */; };
 		4C8EDA791C062B1C00B9D147 /* KeePassHTTPKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8EDA781C062B1C00B9D147 /* KeePassHTTPKit.framework */; };
-		4C8EDA7A1C062B2600B9D147 /* KeePassHTTPKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C8EDA781C062B1C00B9D147 /* KeePassHTTPKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4C8EDA7A1C062B2600B9D147 /* KeePassHTTPKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C8EDA781C062B1C00B9D147 /* KeePassHTTPKit.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4C967E361BF63CA900B1838C /* MPHServerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C967E351BF63CA900B1838C /* MPHServerDelegate.m */; };
 		4CDE59481BFA051000C7AF5B /* MacPassHTTPSettings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4CDE594A1BFA051000C7AF5B /* MacPassHTTPSettings.xib */; };
 /* End PBXBuildFile section */
