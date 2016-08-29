@@ -125,7 +125,7 @@ static NSUUID *_rootUUID = nil;
   /* move the entry only on the main thread! */
   dispatch_semaphore_t sema = dispatch_semaphore_create(0L);
   dispatch_async(dispatch_get_main_queue(), ^{
-    [document.root addEntry:configEntry];
+    [configEntry addToGroup:document.root];
     dispatch_semaphore_signal(sema);
   });
   dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
@@ -223,7 +223,7 @@ static NSUUID *_rootUUID = nil;
     if (!entry) {
       /* create entry and tell the user about it*/
       entry = [[KPKEntry alloc] init];
-      [welf.queryDocument.root addEntry:entry];
+      [entry addToGroup:welf.queryDocument.root];
       title = NSLocalizedStringFromTableInBundle(@"CREATED_CREDENTIALS_USERNAME_%@_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notification on newly created credentials");
 
     }
