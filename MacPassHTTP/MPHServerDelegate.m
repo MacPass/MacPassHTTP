@@ -147,10 +147,10 @@ static NSUUID *_rootUUID = nil;
     
     /* check each entry in the group */
     for (KPKEntry *entry in group.entries) {
-      NSString *entryUrl = [entry.url finalValueForEntry:entry];
-      NSString *entryTitle = [entry.title finalValueForEntry:entry];
-      NSString *entryUsername = [entry.username finalValueForEntry:entry];
-      NSString *entryPassword = [entry.password finalValueForEntry:entry];
+      NSString *entryUrl = [entry.url kpk_finalValueForEntry:entry];
+      NSString *entryTitle = [entry.title kpk_finalValueForEntry:entry];
+      NSString *entryUsername = [entry.username kpk_finalValueForEntry:entry];
+      NSString *entryPassword = [entry.password kpk_finalValueForEntry:entry];
       
       if (url == nil || [entryTitle rangeOfString:url].length > 0 || [entryUrl rangeOfString:url].length > 0) {
         [entries addObject:[KPHResponseEntry entryWithUrl:entryUrl name:entryTitle login:entryUsername password:entryPassword uuid:[entry.uuid UUIDString] stringFields:nil]];
