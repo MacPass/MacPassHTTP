@@ -45,8 +45,8 @@ NSString *const kMPHSettingsKeyShowNotifications      = @"MPHTTPSettingsKeyShowN
                                                              kMPHSettingsKeyShowMenuItem : @YES }];
 }
 
-- (instancetype)initWithPluginManager:(MPPluginManager *)manager {
-  self = [super initWithPluginManager:manager];
+- (instancetype)initWithPluginHost:(MPPluginHost *)host {
+  self = [super initWithPluginHost:host];
   if(self) {
     _showStatusItem = [[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyShowMenuItem];
     _serverPort = [[NSUserDefaults standardUserDefaults] integerForKey:kMPHSettingsKeyHttpPort];
