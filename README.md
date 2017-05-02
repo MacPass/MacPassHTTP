@@ -1,8 +1,9 @@
-#MacPassHTTP
+# MacPassHTTP
 
 KeePassHTTP plugin for [MacPass](https://github.com/mstarke/MacPass)
 
-##Dependencies
+## Dependencies
+
 [KeePassHTTPKit](https://github.com/MacPass/KeePassHTTPKit)
 
 [MacPass Source](https://github.com/mstarke/MacPass)
