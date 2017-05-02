@@ -8,7 +8,7 @@ KeePassHTTP plugin for [MacPass](https://github.com/mstarke/MacPass)
 
 [MacPass Source](https://github.com/mstarke/MacPass)
 
-##Installation
+## Installation
 
 ### Using precompiled verson
 
@@ -53,7 +53,8 @@ xcodebuild
 The Plugin is moved to the plugin folder of MacPass automacially.
 ````~/Library/Application Support/MacPass/MacPassHTTP.mpplugin````
 
-##License
+## License
+
 The MIT License (MIT)
 
 Copyright (c) 2015 Michael Starke, HicknHack Software GmbH
@@ -76,8 +77,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-##Additinal Licenses
-###KeePassHTTPKit
+## Additinal Licenses
+
+### KeePassHTTPKit
+
 The MIT License (MIT)
 
 Copyright (c) 2014 James Hurst<br>
