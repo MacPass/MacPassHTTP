@@ -1,0 +1,21 @@
+osx_image: xcode9
+xcode_project: MacPassHTTP.xcodeproj
+xcode_scheme: MacPassHTTP
+language: objective-c
+
+before_install:
+  - git clone --depth=50 --branch=continuous https://github.com/mstarke/MacPass.git "${HOME}/MacPassHTTP"
+  - cd "${HOME}"
+  - carthage bootstrap --platform Mac
+
+after_success:
+  - cd ./build/Build/Products/Release
+  - zip -9r MacPassHTTP-continuous.zip MacPassHTTP.mpplugin
+  - cd -
+  - mv ./build/Build/Products/Release/MacPassHTTP-continuous.zip .
+
+script: xcodebuild clean && xcodebuild build -configuration release -project MacPass.xcodeproj  -scheme MacPass CODE_SIGNING_REQUIRED=NO -derivedDataPath ./build
+
+branches:
+  only:
+    - /^(?i:continuous)$/
