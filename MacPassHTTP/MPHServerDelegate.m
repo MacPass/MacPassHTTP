@@ -19,7 +19,8 @@ static NSUUID *_rootUUID = nil;
 
 @interface MPHServerDelegate () <NSUserNotificationCenterDelegate>
 
-@property (weak) MPDocument *queryDocument;
+@property (weak) MPDocument *queryDocument; // TODO: convert to list of documents to support more than one open document!
+//@property (strong) NSHashTable *queryDocuments;
 @property (nonatomic, weak) KPKEntry *configurationEntry;
 @property (readonly) BOOL queryDocumentOpen;
 @property (strong) MPHRequestAccessWindowController *requestController;
@@ -52,20 +53,21 @@ static NSUUID *_rootUUID = nil;
   NSString *prefix = [NSString stringWithFormat:KPHAssociatKeyFormat, @"" ];
   for(KPKAttribute *attribute in self.configurationEntry.customAttributes) {
     if([attribute.key hasPrefix:prefix]) {
+      /* push history to be a good citizen */
+      [self.configurationEntry pushHistory];
       [self.configurationEntry removeCustomAttribute:attribute];
     }
   }
-
 }
 
 - (void)clearPermissions {
   if(!self.queryDocument) {
     return;
   }
-  
-  /* TODO History support! */
+
   for(KPKEntry *entry in self.queryDocument.root.childEntries) {
     KPKAttribute *attribute = [entry customAttributeForKey:KPHSettingsEntryName];
+    [entry pushHistory];
     [entry removeCustomAttribute:attribute];
   }
 }
@@ -77,16 +79,18 @@ static NSUUID *_rootUUID = nil;
 
 - (KPKEntry *)configurationEntry {
   /* don't return the configurationEntry if it is isn't in the root group, we will move it there first */
-  if(_configurationEntry != nil && [_configurationEntry.parent.uuid isEqual:_queryDocument.root.uuid])
+  if(_configurationEntry != nil && [_configurationEntry.parent.uuid isEqual:_queryDocument.root.uuid]) {
     return  _configurationEntry;
+  }
   
-  NSArray *documents = [[NSDocumentController sharedDocumentController] documents];
+  
+  NSArray *documents = [NSDocumentController sharedDocumentController].documents;
   
   MPDocument __weak *lastDocument;
   
   for(MPDocument *document in documents) {
     if(document.encrypted) {
-      NSLog(@"Skipping locked Database: %@", [document displayName]);
+      NSLog(@"Skipping locked Database: %@", document.displayName);
       /* TODO: Show input window and open db with window */
       continue;
     }
