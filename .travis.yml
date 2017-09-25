@@ -4,9 +4,10 @@ xcode_scheme: MacPassHTTP
 language: objective-c
 
 before_install:
+  - carthage bootstrap --platform Mac # run carthage for MacPassHTTP
   - git clone --depth=50 --branch=continuous https://github.com/mstarke/MacPass.git "${HOME}/MacPass"
-  - cd "${HOME}"
-  - carthage bootstrap --platform Mac
+  - cd "${HOME}/MacPass"
+  - carthage bootstrap --platform Mac # run carthage for MacPass
 
 after_success:
   - cd ./build/Build/Products/Release
