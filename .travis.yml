@@ -8,7 +8,7 @@ before_install:
   - git clone --recursive --depth=50 --branch=continuous https://github.com/mstarke/MacPass.git "${TRAVIS_BUILD_DIR}/../MacPass"
   - cd "${TRAVIS_BUILD_DIR}/../MacPass"
   - carthage bootstrap --platform Mac
-  - cd "{TRAVIS_BUILD_DIR}"
+  - cd "${TRAVIS_BUILD_DIR}"
   - carthage bootstrap --platform Mac # run carthage for MacPassHTTP
 
 after_success:
