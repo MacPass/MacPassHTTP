@@ -4,12 +4,11 @@ xcode_scheme: MacPassHTTP
 language: objective-c
 
 before_install:
-  # get MacPass sources
   - git clone --recursive --depth=50 --branch=continuous https://github.com/mstarke/MacPass.git "${TRAVIS_BUILD_DIR}/../MacPass"
   - cd "${TRAVIS_BUILD_DIR}/../MacPass"
   - carthage bootstrap --platform macOS
   - cd "${TRAVIS_BUILD_DIR}"
-  - carthage bootstrap --platform macOS # run carthage for MacPassHTTP
+  - carthage bootstrap --platform macOS
 
 after_success:
   - cd ./build/Build/Products/Release
@@ -17,8 +16,19 @@ after_success:
   - cd -
   - mv ./build/Build/Products/Release/MacPassHTTP-continuous.zip .
 
-script: xcodebuild clean && xcodebuild build -configuration release -project MacPassHTTP.xcodeproj  -scheme MacPassHTTP CODE_SIGNING_REQUIRED=NO -derivedDataPath ./build
+script: xcodebuild clean && xcodebuild build -configuration release -project MacPassHTTP.xcodeproj -scheme MacPassHTTP CODE_SIGNING_REQUIRED=NO -derivedDataPath ./build
 
-# branches:
-#   only:
-#     - /^(?i:continuous)$/
+branches:
+  only:
+    - /^(?i:continuous)$/
+
+deploy:
+  skip_cleanup: true
+  provider: releases
+  api_key:
+    secure: R+lBThm58WA5/Dbh3ZLDi2FLnti/Q++Wfext+llekMk2AiL1/1+aKVpSnHuOqm51zVzhw9PW/HwHIx+HNom7F/CRHQqwFhOPPNkFcFadXxdu/y95jV1HpmEu1n30XO1p29nPfhB5sX9QWqJxcyBlZHrH6MIEMJCEU7mLnh440uBi4BVB7s1msxcNydpyRgNfcLrBFt1RW6IUfJZ8m7vE++kcIiFmNOq+bl9xgNX2EnA2sKL241V+EHSEyttLeLGnknWlSsDbca1dgnd7ix9ZkZgu4AbsxFE8r44I/6xUtjppCuLqubUYtTcnWqti/+FT29QP1pNMGXb76SdIQ2HEPfxChJndM9ppAb8vWcLxowaEkfCfzCG6vxGO373VZohSSIrXHvW8086lZUAvYplYmLiUkocj/+0z1j7e4Akb7wizieg4dTEx0QQcJsnm2viDIpyIHuMgRJZWJRn7hW4QnGVRclKIqSTKvOo586dzWcaB7QoKMikL7ohlD5Q7WW4cLmMPsl+OzkIJFmRRmo0dXR/ov9I5g259OAzZQ9OmRpX3gkGtEF2WgnhurC73s/YVa9xdodAfz4YsY0aloTxlIhDWt5DP5Sq9uz735A8znmY+zdjtZPcUf4eMVrPLRe5dn9TL+aMBjxw+RM3X44rnMm1n2NQA+Juqo087j+jPrAQ=
+  file: MacPassHTTP-continuous.zip
+  on:
+    tags: true
+    repo: MacPass/MacPassHTTP
+    branch: continuous
