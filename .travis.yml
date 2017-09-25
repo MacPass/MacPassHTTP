@@ -8,6 +8,7 @@ before_install:
   - git clone --recursive --depth=50 --branch=continuous https://github.com/mstarke/MacPass.git "${HOME}/MacPass"
   - cd "${HOME}/MacPass"
   - carthage bootstrap --platform Mac # run carthage for MacPass
+  - cd "${HOME}/MacPassHTTP" # change back to MacPassHTTP directory
 
 after_success:
   - cd ./build/Build/Products/Release
