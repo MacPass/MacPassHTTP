@@ -4,11 +4,12 @@ xcode_scheme: MacPassHTTP
 language: objective-c
 
 before_install:
+  # get MacPass sources
+  - git clone --recursive --depth=50 --branch=continuous https://github.com/mstarke/MacPass.git "${TRAVIS_BUILD_DIR}/../MacPass"
+  - cd "${TRAVIS_BUILD_DIR}/../MacPass"
+  - carthage bootstrap --platform Mac
+  - cd "{TRAVIS_BUILD_DIR}"
   - carthage bootstrap --platform Mac # run carthage for MacPassHTTP
-  - git clone --recursive --depth=50 --branch=continuous https://github.com/mstarke/MacPass.git "${HOME}/MacPass"
-  - cd "${HOME}/MacPass"
-  - carthage bootstrap --platform Mac # run carthage for MacPass
-  - cd "${HOME}/MacPassHTTP" # change back to MacPassHTTP directory
 
 after_success:
   - cd ./build/Build/Products/Release
