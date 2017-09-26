@@ -12,7 +12,7 @@ before_install:
 
 after_success:
   - cd ./build/Build/Products/Release
-  - zip -9r MacPassHTTP-continuous.zip MacPassHTTP.mpplugin
+  - zip -9ry MacPassHTTP-continuous.zip MacPassHTTP.mpplugin
   - cd -
   - mv ./build/Build/Products/Release/MacPassHTTP-continuous.zip .
 
