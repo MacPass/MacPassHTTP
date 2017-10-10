@@ -206,7 +206,9 @@ static NSUUID *_rootUUID = nil;
   dispatch_async(dispatch_get_main_queue(), ^{
     
     // sheet dismissal get's done inside the window
-    [NSApp beginSheet:welf.requestController.window modalForWindow:welf.queryDocument.windowForSheet modalDelegate:nil didEndSelector:NULL contextInfo:NULL];
+    [welf.queryDocument.windowForSheet beginSheet:welf.requestController.window completionHandler:^(NSModalResponse returnCode) {
+      NSLog(@"Sheet dismissed!");
+    }];
   });
   
   dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
