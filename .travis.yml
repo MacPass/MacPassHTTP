@@ -16,7 +16,7 @@ after_success:
   - cd -
   - mv ./build/Build/Products/Release/MacPassHTTP-continuous.zip .
 
-script: xcodebuild clean && xcodebuild build -configuration release -project MacPassHTTP.xcodeproj -scheme MacPassHTTP CODE_SIGNING_REQUIRED=NO -derivedDataPath ./build
+script: xcodebuild clean && xcodebuild build -configuration release -project MacPassHTTP.xcodeproj -scheme MacPassHTTP CODE_SIGNING_REQUIRED=NO SKIP_INSTALL=YES -derivedDataPath ./build
 
 branches:
   only:
