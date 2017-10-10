@@ -11,7 +11,7 @@ before_install:
   - carthage bootstrap --platform macOS
 
 after_success:
-  - cd $(readlink ./build/Build/Products/Release)/..
+  - cd $(readlink ./build/Build/Products/Release/MacPassHTTP.mpplugin)/..
   - zip -9ry MacPassHTTP-continuous.zip MacPassHTTP.mpplugin
   - cd -
   - mv $(readlink ./build/Build/Products/Release/MacPassHTTP.mpplugin)/../MacPassHTTP-continuous.zip .
