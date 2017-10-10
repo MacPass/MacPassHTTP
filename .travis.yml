@@ -11,10 +11,10 @@ before_install:
   - carthage bootstrap --platform macOS
 
 after_success:
-  - cd ./build/Build/Products/Release
+  - cd $(readlink ./build/Build/Products/Release)/..
   - zip -9ry MacPassHTTP-continuous.zip MacPassHTTP.mpplugin
   - cd -
-  - mv ./build/Build/Products/Release/MacPassHTTP-continuous.zip .
+  - mv $(readlink ./build/Build/Products/Release/MacPassHTTP.mpplugin)/../MacPassHTTP-continuous.zip .
 
 script: xcodebuild clean && xcodebuild build -configuration release -project MacPassHTTP.xcodeproj -scheme MacPassHTTP CODE_SIGNING_REQUIRED=NO SKIP_INSTALL=YES -derivedDataPath ./build
 
