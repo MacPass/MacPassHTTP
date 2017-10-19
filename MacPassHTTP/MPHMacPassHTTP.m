@@ -17,8 +17,8 @@ NSUInteger const kKeePassHTTPDefaultPort = 19455;
 
 NSString *const kMPHSettingsKeyShowMenuItem           = @"MPHTTPSettingsKeyShowMenuItem";
 NSString *const kMPHSettingsKeyHttpPort               = @"MPHTTPSettingsKeyHttpPort";
-NSString *const kMPHSettingsKeyAllowRemoteConnections = @"MPHSettingsKeyAllowRemoteConnections" ;
-NSString *const kMPHSettingsKeyShowNotifications      = @"MPHTTPSettingsKeyShowNotifications;";
+NSString *const kMPHSettingsKeyAllowRemoteConnections = @"MPHTTPSettingsKeyAllowRemoteConnections" ;
+NSString *const kMPHSettingsKeyShowNotifications      = @"MPHTTPSettingsKeyShowNotifications";
 
 
 @interface MPHMacPassHTTP ()
