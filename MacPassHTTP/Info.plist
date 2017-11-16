@@ -21,7 +21,7 @@
 	<key>CFBundleVersion</key>
 	<string>UNKNOWN</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2015 HicknHack Software GmbH. All rights reserved.</string>
+	<string>Copyright © 2015-2017 HicknHack Software GmbH. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>MPHMacPassHTTP</string>
 </dict>
