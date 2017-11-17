@@ -10,7 +10,7 @@ KeePassHTTP plugin for [MacPass](https://github.com/mstarke/MacPass)
 
 ## Installation
 
-### Using precompiled verson
+### Using a precompiled version
 
 Download the latest release from the [Releases page](https://github.com/MacPass/MacPassHTTP/releases), extract, and copy the resulting file to the MacPass plugin folder at `~/Library/Application Support/MacPass/`. Restart MacPass if you're already running it.
 
