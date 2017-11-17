@@ -24,7 +24,7 @@ cd MacPassHTTP
 * Install [Carthage](https://github.com/Carthage/Carthage#installing-carthage)
 * Fetch and build dependencies for MacPassHTTP
 ```bash
-carthage bootstrap --platform Mac
+carthage bootstrap --platform macOS
 ```
 * Clone MacPass and fetch and build dependencies
 ```bash
@@ -33,7 +33,7 @@ git clone https://github.com/mstarke/MacPass
 cd MacPass
 git checkout 0.7.1
 git submodule update --init --recursive
-carthage bootstrap --platform Mac
+carthage bootstrap --platform macOS
 ```
 
 * If your folder structure isn't like the following, you need to adjust the ````HEADER_SEARCH_PATHS```` to point to the MacPass folder
@@ -57,7 +57,7 @@ The Plugin is moved to the plugin folder of MacPass automacially.
 
 The MIT License (MIT)
 
-Copyright (c) 2015 Michael Starke, HicknHack Software GmbH
+Copyright (c) 2015-2017 Michael Starke, HicknHack Software GmbH
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -84,7 +84,7 @@ SOFTWARE.
 The MIT License (MIT)
 
 Copyright (c) 2014 James Hurst<br>
-Copyright (c) 2015-2016 Michael Starke, HicknHack Software GmbH
+Copyright (c) 2015-2017 Michael Starke, HicknHack Software GmbH
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
