@@ -66,9 +66,11 @@ static NSUUID *_rootUUID = nil;
   }
 
   for(KPKEntry *entry in self.queryDocument.root.childEntries) {
-    KPKAttribute *attribute = [entry customAttributeForKey:KPHSettingsEntryName];
-    [entry pushHistory];
-    [entry removeCustomAttribute:attribute];
+    KPKAttribute *attribute = [entry customAttributeWithKey:KPHSettingsEntryName];
+    if(attribute) {
+      [entry pushHistory];
+      [entry removeCustomAttribute:attribute];
+    }
   }
 }
 
@@ -182,7 +184,7 @@ static NSUUID *_rootUUID = nil;
     return nil;
   }
   
-  return [self.configurationEntry customAttributeForKey:[NSString stringWithFormat:KPHAssociatKeyFormat, label]].value;
+  return [self.configurationEntry valueForAttributeWithKey:[NSString stringWithFormat:KPHAssociatKeyFormat, label]];
 }
 
 - (NSString *)server:(KPHServer *)server labelForKey:(NSString *)key {
