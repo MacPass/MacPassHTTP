@@ -64,7 +64,7 @@ static NSUUID *_rootUUID = nil;
   if(!self.queryDocument) {
     return;
   }
-
+  
   for(KPKEntry *entry in self.queryDocument.root.childEntries) {
     KPKAttribute *attribute = [entry customAttributeWithKey:KPHSettingsEntryName];
     if(attribute) {
@@ -147,6 +147,12 @@ static NSUUID *_rootUUID = nil;
 + (NSArray *)recursivelyFindEntriesInGroups:(NSArray *)groups forURL:(NSString *)url {
   NSMutableArray *entries = @[].mutableCopy;
   
+  BOOL includeCustomField = [[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyIncludeKPHStringFields];
+  NSMutableArray *stringFields;
+  if(includeCustomField) {
+    stringFields = [[NSMutableArray alloc] init];
+  }
+  
   for (KPKGroup *group in groups) {
     /* recurse through any subgroups */
     [entries addObjectsFromArray:[self recursivelyFindEntriesInGroups:group.groups forURL:url]];
@@ -157,6 +163,14 @@ static NSUUID *_rootUUID = nil;
       NSString *entryTitle = [entry.title kpk_finalValueForEntry:entry];
       NSString *entryUsername = [entry.username kpk_finalValueForEntry:entry];
       NSString *entryPassword = [entry.password kpk_finalValueForEntry:entry];
+      
+      if(includeCustomField) {
+        for(KPKAttribute *attribute in entry.customAttributes) {
+          if([attribute.key hasPrefix:@"KPH: "]) {
+            // add to list
+          }
+        }
+      }
       
       if (url == nil || [entryTitle rangeOfString:url].length > 0 || [entryUrl rangeOfString:url].length > 0) {
         [entries addObject:[KPHResponseEntry entryWithUrl:entryUrl name:entryTitle login:entryUsername password:entryPassword uuid:[entry.uuid UUIDString] stringFields:nil]];
@@ -233,13 +247,13 @@ static NSUUID *_rootUUID = nil;
       entry = [[KPKEntry alloc] init];
       [entry addToGroup:welf.queryDocument.root];
       title = NSLocalizedStringFromTableInBundle(@"CREATED_CREDENTIALS_USERNAME_%@_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notification on newly created credentials");
-
+      
     }
     else {
       /* just update the entry */
       title = NSLocalizedStringFromTableInBundle(@"UPDATED_CREDENTIALS_USERNAME_%@_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notification on updated credentials");
     }
-  
+    
     entry.title = url;
     entry.username = username;
     entry.password = password;

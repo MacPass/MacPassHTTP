@@ -1,3 +1,3 @@
+github "MacPass/KeePassHTTPKit" "1.2.5"
 github "jsonmodel/jsonmodel" "cd940e7ae0e74c927cd4293931f5d7e6465c343d"
-github "mstarke/KeePassHTTPKit" "1.2.3"
 github "swisspol/GCDWebServer" "3.4.1"

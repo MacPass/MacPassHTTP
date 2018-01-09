@@ -147,7 +147,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MPH;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "HicknHack Software GmbH";
 				TargetAttributes = {
 					4C487E6C1BF39FC500E595DE = {
