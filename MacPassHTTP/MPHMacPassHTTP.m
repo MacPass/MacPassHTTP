@@ -116,11 +116,12 @@ NSString *const kMPHSettingsKeyIncludeKPHStringFields = @"MPHSettingsKeyIncludeK
       self.statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
       self.statusItem.menu = [[NSMenu alloc] init];
       [self.statusItem.menu addItemWithTitle:@"STATUS" action:NULL keyEquivalent:@""];
-      NSImage *image = [[NSImage imageNamed:NSImageNameApplicationIcon] copy];
-      image.size = NSMakeSize(18, 18);
-      [self.statusItem setImage:image];
+      NSBundle *bdl = [NSBundle bundleForClass:self.class];
+      NSImage *image = [bdl imageForResource:@"Lock"];
+      //image.size = NSMakeSize(18, 18);
+      self.statusItem.image = image;
     }
-    NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
+    NSBundle *myBundle = [NSBundle bundleForClass:self.class];
     NSString *okTitle = NSLocalizedStringFromTableInBundle(@"STATUS_SERVER_OK", @"", myBundle, "Item displayed when server is running!");
     NSString *errorTitle =  NSLocalizedStringFromTableInBundle(@"STATUS_SERVER_ERROR", @"", myBundle, "Item displayed when server failed to start!");
     self.statusItem.menu.itemArray.firstObject.title = self.server.isRunning ? okTitle : errorTitle;
