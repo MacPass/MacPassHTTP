@@ -12,6 +12,7 @@
 
 #import "MPDocument.h"
 #import "NSString+MPPasswordCreation.h"
+#import "NSString+Levenshtein.h"
 
 #import <KeePassKit/KeePassKit.h>
 
@@ -144,7 +145,7 @@ static NSUUID *_rootUUID = nil;
 
 #pragma mark - KPHDelegate
 
-+ (NSArray *)recursivelyFindEntriesInGroups:(NSArray *)groups forURL:(NSString *)url {
++ (NSArray *)allEntriesInGroups:(NSArray *)groups {
   NSMutableArray *entries = @[].mutableCopy;
   
   BOOL includeCustomField = [[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyIncludeKPHStringFields];
@@ -155,9 +156,9 @@ static NSUUID *_rootUUID = nil;
   
   for (KPKGroup *group in groups) {
     /* recurse through any subgroups */
-    [entries addObjectsFromArray:[self recursivelyFindEntriesInGroups:group.groups forURL:url]];
+    [entries addObjectsFromArray:[self allEntriesInGroups:group.groups]];
     
-    /* check each entry in the group */
+    /* add each entry in the group */
     for (KPKEntry *entry in group.entries) {
       NSString *entryUrl = [entry.url kpk_finalValueForEntry:entry];
       NSString *entryTitle = [entry.title kpk_finalValueForEntry:entry];
@@ -172,9 +173,27 @@ static NSUUID *_rootUUID = nil;
         }
       }
       
-      if (url == nil || [entryTitle rangeOfString:url].length > 0 || [entryUrl rangeOfString:url].length > 0) {
-        [entries addObject:[KPHResponseEntry entryWithUrl:entryUrl name:entryTitle login:entryUsername password:entryPassword uuid:[entry.uuid UUIDString] stringFields:nil]];
+      [entries addObject:[KPHResponseEntry entryWithUrl:entryUrl name:entryTitle login:entryUsername password:entryPassword uuid:[entry.uuid UUIDString] stringFields:nil]];
+    }
+  }
+  return entries;
+}
+
++ (NSArray *)recursivelyFindEntriesInGroups:(NSArray *)groups forURL:(NSString *)url {
+  NSMutableArray *entries = @[].mutableCopy;
+  
+  NSUInteger minLevenshtein = NSUIntegerMax;
+	
+  /* iterate through each entry in the group to find the array of entries that have the minimum levenshtein distance */
+  for (KPHResponseEntry *entry in [self allEntriesInGroups:groups]) {
+    NSUInteger levenshtein = [url levenshteinDistanceToString:entry.url];
+    if (url == nil || ([[entry.url stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] > 0 && levenshtein <= minLevenshtein)) {
+      /* if we have found a new minimum levenshtein distance, remove all previous entries */
+      if (url != nil && levenshtein < minLevenshtein) {
+        minLevenshtein = levenshtein;
+        [entries removeAllObjects];
       }
+      [entries addObject:entry];
     }
   }
   return entries;
@@ -268,7 +287,7 @@ static NSUUID *_rootUUID = nil;
     return @[];
   }
   
-  return [MPHServerDelegate recursivelyFindEntriesInGroups:self.queryDocument.root.groups forURL:nil];
+  return [MPHServerDelegate allEntriesInGroups:@[self.queryDocument.root]];
 }
 
 - (NSString *)generatePasswordForServer:(KPHServer *)server {
