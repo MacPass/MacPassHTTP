@@ -145,7 +145,7 @@ static NSUUID *_rootUUID = nil;
 #pragma mark - KPHDelegate
 
 + (NSArray *)recursivelyFindEntriesInGroups:(NSArray *)groups forURL:(NSString *)url {
-  NSMutableArray *entries = @[].mutableCopy;
+  NSMutableArray *entries = [[NSMutableArray alloc] init];
   
   BOOL includeCustomField = [[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyIncludeKPHStringFields];
   NSMutableArray *stringFields;
@@ -167,13 +167,17 @@ static NSUUID *_rootUUID = nil;
       if(includeCustomField) {
         for(KPKAttribute *attribute in entry.customAttributes) {
           if([attribute.key hasPrefix:@"KPH: "]) {
-            // add to list
+            KPHResponseStringField *stringField = [KPHResponseStringField stringFieldWithKey:attribute.key value:attribute.value];
+            if(stringField) {
+              [stringFields addObject:stringField];
+            }
           }
         }
       }
       
       if (url == nil || [entryTitle rangeOfString:url].length > 0 || [entryUrl rangeOfString:url].length > 0) {
-        [entries addObject:[KPHResponseEntry entryWithUrl:entryUrl name:entryTitle login:entryUsername password:entryPassword uuid:[entry.uuid UUIDString] stringFields:nil]];
+        // FIXME: fix generics compiler warnings!
+        [entries addObject:[KPHResponseEntry entryWithUrl:entryUrl name:entryTitle login:entryUsername password:entryPassword uuid:entry.uuid.UUIDString stringFields:(id)stringFields]];
       }
     }
   }
