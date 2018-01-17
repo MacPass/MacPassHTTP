@@ -16,7 +16,9 @@ FOUNDATION_EXPORT NSString *const kMPHSettingsKeyShowMenuItem;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyHttpPort;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyAllowRemoteConnections;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyShowNotifications;
+FOUNDATION_EXPORT NSString *const kMPHSettingsKeyIncludeRootDomain;
 FOUNDATION_EXPORT NSString *const kMPHSettingsKeyIncludeKPHStringFields;
+
 
 @class MPHServerDelegate;
 
