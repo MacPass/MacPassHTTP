@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C10B73F1C08D2150077E477 /* MPHRequestAccessWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C10B73D1C08D2150077E477 /* MPHRequestAccessWindowController.m */; };
+		4C3C897C200FADEF00D306BE /* Lock.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 4C3C897B200FADEE00D306BE /* Lock.pdf */; };
 		4C3CAB051BFF339E009B4DF0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4C3CAB071BFF339E009B4DF0 /* Localizable.strings */; };
 		4C487E781BF3A0A400E595DE /* MPHMacPassHTTP.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C487E771BF3A0A400E595DE /* MPHMacPassHTTP.m */; };
 		4C487E7C1BF3A47700E595DE /* MPHSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4C487E7A1BF3A47700E595DE /* MPHSettingsViewController.m */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		4C10B73C1C08D2150077E477 /* MPHRequestAccessWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPHRequestAccessWindowController.h; sourceTree = "<group>"; };
 		4C10B73D1C08D2150077E477 /* MPHRequestAccessWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPHRequestAccessWindowController.m; sourceTree = "<group>"; };
+		4C3C897B200FADEE00D306BE /* Lock.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = Lock.pdf; path = Assets/Lock.pdf; sourceTree = SOURCE_ROOT; };
 		4C3CAB011BFF32AB009B4DF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/MacPassHTTPSettings.strings; sourceTree = "<group>"; };
 		4C3CAB061BFF339E009B4DF0 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		4C3CAB081BFF33AA009B4DF0 /* Base */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		4C487E6F1BF39FC500E595DE /* MacPassHTTP */ = {
 			isa = PBXGroup;
 			children = (
+				4C3C897B200FADEE00D306BE /* Lock.pdf */,
 				4C10B7411C08D2AE0077E477 /* UI */,
 				4C487E761BF3A0A400E595DE /* MPHMacPassHTTP.h */,
 				4C487E771BF3A0A400E595DE /* MPHMacPassHTTP.m */,
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CDE59481BFA051000C7AF5B /* MacPassHTTPSettings.xib in Resources */,
+				4C3C897C200FADEF00D306BE /* Lock.pdf in Resources */,
 				4C7B63811C0CC66400D7038C /* RequestAccessWindow.xib in Resources */,
 				4C3CAB051BFF339E009B4DF0 /* Localizable.strings in Resources */,
 			);
