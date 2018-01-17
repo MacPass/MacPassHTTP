@@ -1,14 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9532"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
         <capability name="box content view" minToolsVersion="7.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MPHSettingsViewController">
             <connections>
                 <outlet property="allowRemoteConnectionCheckButton" destination="1b8-d7-7dw" id="fmD-nK-ADd"/>
+                <outlet property="includeRootDomainCheckButton" destination="led-eV-gZe" id="Ajb-xY-c2B"/>
                 <outlet property="portTextField" destination="r1I-t4-2dl" id="br6-xv-BwM"/>
                 <outlet property="showMenuItemCheckButton" destination="Ph9-8D-46q" id="Ek8-KF-9Kk"/>
                 <outlet property="showNotificationsCheckButton" destination="7X4-aF-1sY" id="M14-TF-IXs"/>
@@ -18,12 +20,12 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customView translatesAutoresizingMaskIntoConstraints="NO" id="Hz6-mo-xeY">
-            <rect key="frame" x="0.0" y="0.0" width="282" height="303"/>
+            <rect key="frame" x="0.0" y="0.0" width="282" height="325"/>
             <subviews>
-                <box title="Advanced" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="HBN-BZ-nLh">
-                    <rect key="frame" x="17" y="91" width="248" height="98"/>
+                <box borderType="line" title="Advanced" translatesAutoresizingMaskIntoConstraints="NO" id="HBN-BZ-nLh">
+                    <rect key="frame" x="17" y="91" width="248" height="120"/>
                     <view key="contentView" id="fYs-g6-gvy">
-                        <rect key="frame" x="1" y="1" width="246" height="82"/>
+                        <rect key="frame" x="1" y="1" width="246" height="104"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LcT-lm-YzQ">
@@ -52,24 +54,32 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="led-eV-gZe">
+                                <rect key="frame" x="18" y="68" width="210" height="18"/>
+                                <buttonCell key="cell" type="check" title="Include root domain in query" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="vxH-lO-LHN">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="r1I-t4-2dl" firstAttribute="leading" secondItem="LcT-lm-YzQ" secondAttribute="trailing" constant="8" symbolic="YES" id="Bbm-5y-JQh"/>
                             <constraint firstItem="r1I-t4-2dl" firstAttribute="baseline" secondItem="LcT-lm-YzQ" secondAttribute="baseline" id="Bve-gt-4F0"/>
                             <constraint firstItem="1b8-d7-7dw" firstAttribute="leading" secondItem="fYs-g6-gvy" secondAttribute="leading" constant="20" symbolic="YES" id="CMs-7X-ApC"/>
+                            <constraint firstItem="led-eV-gZe" firstAttribute="leading" secondItem="fYs-g6-gvy" secondAttribute="leading" constant="20" symbolic="YES" id="KVw-Tv-LbH"/>
+                            <constraint firstAttribute="trailing" secondItem="led-eV-gZe" secondAttribute="trailing" constant="20" symbolic="YES" id="KYe-dE-3Ae"/>
                             <constraint firstAttribute="bottom" secondItem="1b8-d7-7dw" secondAttribute="bottom" constant="20" symbolic="YES" id="N80-ed-3CJ"/>
                             <constraint firstItem="1b8-d7-7dw" firstAttribute="top" secondItem="r1I-t4-2dl" secondAttribute="bottom" constant="8" symbolic="YES" id="ZkL-Hh-Nn3"/>
                             <constraint firstItem="LcT-lm-YzQ" firstAttribute="leading" secondItem="fYs-g6-gvy" secondAttribute="leading" constant="20" id="cu5-Se-24F"/>
-                            <constraint firstItem="LcT-lm-YzQ" firstAttribute="top" secondItem="fYs-g6-gvy" secondAttribute="top" constant="20" symbolic="YES" id="hYK-do-0xR"/>
+                            <constraint firstItem="led-eV-gZe" firstAttribute="top" secondItem="fYs-g6-gvy" secondAttribute="top" constant="20" symbolic="YES" id="elI-vQ-Njy"/>
+                            <constraint firstItem="LcT-lm-YzQ" firstAttribute="top" secondItem="led-eV-gZe" secondAttribute="bottom" constant="8" symbolic="YES" id="hYK-do-0xR"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="r1I-t4-2dl" secondAttribute="trailing" constant="20" symbolic="YES" id="nCH-YW-oWB"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="1b8-d7-7dw" secondAttribute="trailing" constant="20" symbolic="YES" id="yfk-sZ-Xye"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
-                <box title="Interface" borderType="line" translatesAutoresizingMaskIntoConstraints="NO" id="91g-f4-0PT">
-                    <rect key="frame" x="17" y="193" width="248" height="90"/>
+                <box borderType="line" title="Interface" translatesAutoresizingMaskIntoConstraints="NO" id="91g-f4-0PT">
+                    <rect key="frame" x="17" y="215" width="248" height="90"/>
                     <view key="contentView" id="G5m-fe-1oi">
                         <rect key="frame" x="1" y="1" width="246" height="74"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,8 +109,6 @@
                             <constraint firstItem="7X4-aF-1sY" firstAttribute="top" secondItem="Ph9-8D-46q" secondAttribute="bottom" constant="6" symbolic="YES" id="s0h-9r-tOI"/>
                         </constraints>
                     </view>
-                    <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                    <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </box>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BOb-dd-2DX">
                     <rect key="frame" x="20" y="48" width="242" height="25"/>

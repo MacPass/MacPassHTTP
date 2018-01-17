@@ -144,7 +144,7 @@ static NSUUID *_rootUUID = nil;
 
 #pragma mark - KPHDelegate
 
-+ (NSArray *)recursivelyFindEntriesInGroups:(NSArray *)groups forURL:(NSString *)url {
++ (NSArray *)recursivelyFindEntriesInGroups:(NSArray *)groups forURL:(NSString *)url forDomainRoot:(NSString *)domainUrl{
   NSMutableArray *entries = @[].mutableCopy;
   
   BOOL includeCustomField = [[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyIncludeKPHStringFields];
@@ -152,10 +152,10 @@ static NSUUID *_rootUUID = nil;
   if(includeCustomField) {
     stringFields = [[NSMutableArray alloc] init];
   }
-  
+
   for (KPKGroup *group in groups) {
     /* recurse through any subgroups */
-    [entries addObjectsFromArray:[self recursivelyFindEntriesInGroups:group.groups forURL:url]];
+    [entries addObjectsFromArray:[self recursivelyFindEntriesInGroups:group.groups forURL:url forDomainRoot:domainUrl]];
     
     /* check each entry in the group */
     for (KPKEntry *entry in group.entries) {
@@ -172,7 +172,7 @@ static NSUUID *_rootUUID = nil;
         }
       }
       
-      if (url == nil || [entryTitle rangeOfString:url].length > 0 || [entryUrl rangeOfString:url].length > 0) {
+      if (url == nil || [entryTitle rangeOfString:url].length > 0 || [entryUrl rangeOfString:url].length > 0 || (domainUrl != nil && ([entryTitle rangeOfString:domainUrl].length > 0 || [entryUrl rangeOfString:domainUrl].length > 0))) {
         [entries addObject:[KPHResponseEntry entryWithUrl:entryUrl name:entryTitle login:entryUsername password:entryPassword uuid:[entry.uuid UUIDString] stringFields:nil]];
       }
     }
@@ -180,17 +180,39 @@ static NSUUID *_rootUUID = nil;
   return entries;
 }
 
++ (NSString *)getRootDomain:(NSString *)host
+{
+    // Return nil if none found.
+    NSString * rootDomain = nil;
+    
+    // Separate the host into its constituent components, e.g. [@"secure", @"twitter", @"com"]
+    NSArray * hostComponents = [host componentsSeparatedByString:@"."];
+    if ([hostComponents count] >=3 && [host rangeOfString:@"co.uk"].length > 0) {
+        // Create a string out of the last three components in the host name, e.g. @"twitter" and @"com"
+        rootDomain = [NSString stringWithFormat:@"%@.%@.%@", [hostComponents objectAtIndex:([hostComponents count] - 3)], [hostComponents objectAtIndex:([hostComponents count] - 2)], [hostComponents objectAtIndex:([hostComponents count] - 1)]];
+    } else if ([hostComponents count] >=2) {
+        // Create a string out of the last two components in the host name, e.g. @"twitter" and @"com"
+        rootDomain = [NSString stringWithFormat:@"%@.%@", [hostComponents objectAtIndex:([hostComponents count] - 2)], [hostComponents objectAtIndex:([hostComponents count] - 1)]];
+    }
+    
+    return rootDomain;
+}
+
 - (NSArray *)server:(KPHServer *)server entriesForURL:(NSString *)url {
-  if (!self.queryDocumentOpen) {
-    return @[];
-  }
-  
-  NSArray *results = [MPHServerDelegate recursivelyFindEntriesInGroups:@[self.queryDocument.root] forURL:url];
-  if(results.count > 0) {
-    NSString *template = NSLocalizedStringFromTableInBundle(@"REQUEST_ENTRY_FOR_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notificaton on entry request for url");
-    [self showNotificationWithTitle:[NSString stringWithFormat:template,url]];
-  }
-  return results;
+    if (!self.queryDocumentOpen) {
+        return @[];
+    }
+    NSString *domainUrl = nil;
+    if([[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyIncludeRootDomain]) {
+        domainUrl = [MPHServerDelegate getRootDomain:url];
+    }
+
+    NSArray *results = [MPHServerDelegate recursivelyFindEntriesInGroups:@[self.queryDocument.root] forURL:url forDomainRoot:domainUrl];
+    if(results.count > 0) {
+        NSString *template = NSLocalizedStringFromTableInBundle(@"REQUEST_ENTRY_FOR_URL_%@", @"", [NSBundle bundleForClass:self.class], @"Notificaton on entry request for url");
+        [self showNotificationWithTitle:[NSString stringWithFormat:template,url]];
+    }
+    return results;
 }
 
 - (NSString *)server:(KPHServer *)server keyForLabel:(NSString *)label {
@@ -268,7 +290,7 @@ static NSUUID *_rootUUID = nil;
     return @[];
   }
   
-  return [MPHServerDelegate recursivelyFindEntriesInGroups:self.queryDocument.root.groups forURL:nil];
+  return [MPHServerDelegate recursivelyFindEntriesInGroups:self.queryDocument.root.groups forURL:nil forDomainRoot:nil];
 }
 
 - (NSString *)generatePasswordForServer:(KPHServer *)server {

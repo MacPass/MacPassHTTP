@@ -19,7 +19,9 @@ NSString *const kMPHSettingsKeyShowMenuItem           = @"MPHTTPSettingsKeyShowM
 NSString *const kMPHSettingsKeyHttpPort               = @"MPHTTPSettingsKeyHttpPort";
 NSString *const kMPHSettingsKeyAllowRemoteConnections = @"MPHTTPSettingsKeyAllowRemoteConnections" ;
 NSString *const kMPHSettingsKeyShowNotifications      = @"MPHTTPSettingsKeyShowNotifications";
+NSString *const kMPHSettingsKeyIncludeRootDomain      = @"MPHTTPSettingsKeyIncludeRootDomain";
 NSString *const kMPHSettingsKeyIncludeKPHStringFields = @"MPHSettingsKeyIncludeKPHStringFields";
+
 
 
 @interface MPHMacPassHTTP ()
@@ -44,7 +46,8 @@ NSString *const kMPHSettingsKeyIncludeKPHStringFields = @"MPHSettingsKeyIncludeK
                                                              kMPHSettingsKeyAllowRemoteConnections : @(NO),
                                                              kMPHSettingsKeyShowNotifications : @(YES),
                                                              kMPHSettingsKeyShowMenuItem : @YES,
-                                                             kMPHSettingsKeyIncludeKPHStringFields: @NO }];
+                                                             kMPHSettingsKeyIncludeKPHStringFields: @NO,
+                                                             kMPHSettingsKeyIncludeRootDomain: @NO }];
 }
 
 - (instancetype)initWithPluginHost:(MPPluginHost *)host {
