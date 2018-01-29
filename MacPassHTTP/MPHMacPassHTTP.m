@@ -118,6 +118,7 @@ NSString *const kMPHSettingsKeyIncludeKPHStringFields = @"MPHSettingsKeyIncludeK
       [self.statusItem.menu addItemWithTitle:@"STATUS" action:NULL keyEquivalent:@""];
       NSBundle *bdl = [NSBundle bundleForClass:self.class];
       NSImage *image = [bdl imageForResource:@"Lock"];
+      image.template = YES;
       //image.size = NSMakeSize(18, 18);
       self.statusItem.image = image;
     }
