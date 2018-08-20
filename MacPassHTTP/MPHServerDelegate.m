@@ -147,7 +147,7 @@ static NSUUID *_rootUUID = nil;
 + (NSArray *)recursivelyFindEntriesInGroups:(NSArray *)groups forURL:(NSString *)url {
   NSMutableArray *entries = [[NSMutableArray alloc] init];
   
-  BOOL includeCustomField = [[NSUserDefaults standardUserDefaults] boolForKey:kMPHSettingsKeyIncludeKPHStringFields];
+  BOOL includeCustomField = [NSUserDefaults.standardUserDefaults boolForKey:kMPHSettingsKeyIncludeKPHStringFields];
   NSMutableArray *stringFields;
   if(includeCustomField) {
     stringFields = [[NSMutableArray alloc] init];

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="13771" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13771"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
         <capability name="box content view" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -10,6 +10,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="MPHSettingsViewController">
             <connections>
                 <outlet property="allowRemoteConnectionCheckButton" destination="1b8-d7-7dw" id="fmD-nK-ADd"/>
+                <outlet property="includeCustomFieldsInResultsButton" destination="nSj-5f-3Bs" id="dur-uJ-rnz"/>
                 <outlet property="portTextField" destination="r1I-t4-2dl" id="br6-xv-BwM"/>
                 <outlet property="showMenuItemCheckButton" destination="Ph9-8D-46q" id="Ek8-KF-9Kk"/>
                 <outlet property="showNotificationsCheckButton" destination="7X4-aF-1sY" id="M14-TF-IXs"/>
@@ -60,7 +61,7 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="sqS-ph-0i3">
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sqS-ph-0i3">
                                 <rect key="frame" x="18" y="20" width="210" height="42"/>
                                 <textFieldCell key="cell" controlSize="small" sendsActionOnEndEditing="YES" title="Custom fields need to start with KPH: to be included. The space after the colon is mandatory!" id="f9j-XL-YST">
                                     <font key="font" metaFont="smallSystem"/>

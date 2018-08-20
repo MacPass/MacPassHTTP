@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MPHRequestAccessWindowController">
@@ -18,14 +19,13 @@
         <window title="Association Request" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="F0z-JX-Cv5">
             <windowStyleMask key="styleMask" titled="YES"/>
             <rect key="contentRect" x="196" y="240" width="341" height="116"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1417"/>
             <view key="contentView" id="se5-gp-TjO">
                 <rect key="frame" x="0.0" y="0.0" width="341" height="116"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MzR-3k-dKj">
                         <rect key="frame" x="204" y="13" width="123" height="32"/>
-                        <animations/>
                         <buttonCell key="cell" type="push" title="Allow access!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="n7U-wH-6b1">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -39,7 +39,6 @@ DQ
                     </button>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wAp-Xa-psT">
                         <rect key="frame" x="83" y="13" width="121" height="32"/>
-                        <animations/>
                         <buttonCell key="cell" type="push" title="Deny access!" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tdI-Bi-Qmp">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -53,7 +52,6 @@ Gw
                     </button>
                     <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Xu-1L-rXT">
                         <rect key="frame" x="74" y="79" width="249" height="17"/>
-                        <animations/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Message" id="uU3-aw-rJd">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -62,7 +60,6 @@ Gw
                     </textField>
                     <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" setsMaxLayoutWidthAtFirstLayout="YES" translatesAutoresizingMaskIntoConstraints="NO" id="efe-4D-9iG">
                         <rect key="frame" x="74" y="52" width="62" height="17"/>
-                        <animations/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Identifier:" id="5rD-Vu-jX2">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -71,7 +68,6 @@ Gw
                     </textField>
                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="KOq-nn-JLf">
                         <rect key="frame" x="142" y="49" width="179" height="22"/>
-                        <animations/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="hzz-0W-acf">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -84,7 +80,6 @@ Gw
                             <constraint firstAttribute="width" constant="48" id="hsB-65-9SS"/>
                             <constraint firstAttribute="height" constant="48" id="o5t-3s-obD"/>
                         </constraints>
-                        <animations/>
                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="NSCaution" id="h38-A6-blI"/>
                     </imageView>
                 </subviews>
@@ -106,12 +101,11 @@ Gw
                     <constraint firstAttribute="trailing" secondItem="KOq-nn-JLf" secondAttribute="trailing" constant="20" symbolic="YES" id="w1m-vA-hnm"/>
                     <constraint firstItem="KOq-nn-JLf" firstAttribute="baseline" secondItem="efe-4D-9iG" secondAttribute="baseline" id="wk1-pj-AdJ"/>
                 </constraints>
-                <animations/>
             </view>
             <connections>
                 <outlet property="delegate" destination="-2" id="0bl-1N-AYu"/>
             </connections>
-            <point key="canvasLocation" x="221.5" y="-257"/>
+            <point key="canvasLocation" x="48" y="-257"/>
         </window>
     </objects>
     <resources>

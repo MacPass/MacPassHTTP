@@ -16,6 +16,7 @@
 @property (weak) IBOutlet NSButton *showMenuItemCheckButton;
 @property (weak) IBOutlet NSButton *showNotificationsCheckButton;
 @property (weak) IBOutlet NSButton *allowRemoteConnectionCheckButton;
+@property (strong) IBOutlet NSButton *includeCustomFieldsInResultsButton;
 
 - (IBAction)clearKeys:(id)sender;
 - (IBAction)clearPermissions:(id)sender;
@@ -62,6 +63,10 @@
                                    toObject:defaultsController
                                 withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyAllowRemoteConnections]
                                     options:nil];
+    [self.includeCustomFieldsInResultsButton bind:NSValueBinding
+                                         toObject:defaultsController
+                                      withKeyPath:[NSString stringWithFormat:@"values.@%", kMPHSettingsKeyIncludeKPHStringFields]
+                                          options:nil];
     didAwake = YES;
   }
 }
