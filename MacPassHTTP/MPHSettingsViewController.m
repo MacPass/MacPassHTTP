@@ -65,7 +65,7 @@
                                     options:nil];
     [self.includeCustomFieldsInResultsButton bind:NSValueBinding
                                          toObject:defaultsController
-                                      withKeyPath:[NSString stringWithFormat:@"values.@%", kMPHSettingsKeyIncludeKPHStringFields]
+                                      withKeyPath:[NSString stringWithFormat:@"values.%@", kMPHSettingsKeyIncludeKPHStringFields]
                                           options:nil];
     didAwake = YES;
   }
