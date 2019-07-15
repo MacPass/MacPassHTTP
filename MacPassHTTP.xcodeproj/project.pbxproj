@@ -150,7 +150,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MPH;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "HicknHack Software GmbH";
 				TargetAttributes = {
 					4C487E6C1BF39FC500E595DE = {
@@ -160,7 +160,7 @@
 			};
 			buildConfigurationList = 4C487E681BF39FC500E595DE /* Build configuration list for PBXProject "MacPassHTTP" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
