@@ -123,7 +123,7 @@ NSString *const kMPHSettingsKeyIncludeKPHStringFields = @"MPHSettingsKeyIncludeK
       self.statusItem.image = image;
     }
     NSBundle *myBundle = [NSBundle bundleForClass:self.class];
-    NSString *okTitle = NSLocalizedStringFromTableInBundle(@"STATUS_SERVER_OK", @"", myBundle, "Item displayed when server is running!");
+    NSString *okTitle = NSLocalizedStringFromTableInBundle(@"STATUS_SERVER_RUNNING", @"", myBundle, "Item displayed when server is running!");
     NSString *errorTitle =  NSLocalizedStringFromTableInBundle(@"STATUS_SERVER_ERROR", @"", myBundle, "Item displayed when server failed to start!");
     self.statusItem.menu.itemArray.firstObject.title = self.server.isRunning ? okTitle : errorTitle;
   }

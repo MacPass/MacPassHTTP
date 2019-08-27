@@ -1,11 +1,11 @@
-﻿/* Message shown when a new KeePassHTTP Client want's access to the database. Placeholder is replaced by key */
+/* Message shown when a new KeePassHTTP Client want's access to the database. Placeholder is replaced by key */
 "REQUEST_ACCESS_MESSAGE_%@" = "REQUEST_ACCESS_MESSAGE_%@";
 
 /* Item displayed when server failed to start! */
 "STATUS_SERVER_ERROR" = "STATUS_SERVER_ERROR";
 
 /* Item displayed when server is running! */
-"STATUS_SERVER_OK" = "STATUS_SERVER_OK";
+"STATUS_SERVER_RUNNING" = "STATUS_SERVER_RUNNING";
 
 /* Notificaton on entry request for url */
 "REQUEST_ENTRY_FOR_URL_%@" = "REQUEST_ENTRY_FOR_URL_%@";

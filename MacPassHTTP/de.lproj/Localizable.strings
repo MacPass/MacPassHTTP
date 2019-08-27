@@ -1,11 +1,11 @@
-﻿/* Message shown when a new KeePassHTTP Client want's access to the database. Placeholder is replaced by key */
+/* Message shown when a new KeePassHTTP Client want's access to the database. Placeholder is replaced by key */
 "REQUEST_ACCESS_MESSAGE_%@" = "Es gab eine Assoziierungsanfrage für den Schlüssel\n %@.\nMöchten Sie den Zugiff auf die KeePass Datenbank erlauben?";
 
 /* Item displayed when server failed to start! */
-"STATUS_SERVER_ERROR" = "Server konnte nicht gestartet werden!";
+"STATUS_SERVER_ERROR" = "MacPassHTTP Server konnte nicht gestartet werden!";
 
 /* Item displayed when server is running! */
-"STATUS_SERVER_OK" = "Server läuft!";
+"STATUS_SERVER_RUNNING" = "MacPassHTT Server läuft!";
 
 /* Notificaton on entry request for url */
 "REQUEST_ENTRY_FOR_URL_%@" = "Logins für %@";
