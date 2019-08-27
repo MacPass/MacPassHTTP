@@ -26,13 +26,12 @@
 @implementation MPHSettingsViewController
 
 - (void)dealloc {
-  NSLog(@"%@ dealloc", [self class]);
   [self.portTextField unbind:NSValueBinding];
   [self.showMenuItemCheckButton unbind:NSValueBinding];
 }
 
 - (NSBundle *)nibBundle {
-  return [NSBundle bundleForClass:[self class]];
+  return [NSBundle bundleForClass:self.class];
 }
 
 - (NSString *)nibName {
