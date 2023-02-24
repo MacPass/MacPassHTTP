@@ -31,7 +31,7 @@ carthage bootstrap --platform macOS
 cd ..
 git clone https://github.com/mstarke/MacPass
 cd MacPass
-git checkout 0.7.1
+git checkout 0.7.4
 git submodule update --init --recursive
 carthage bootstrap --platform macOS
 ```
